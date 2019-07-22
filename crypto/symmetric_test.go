@@ -3,7 +3,7 @@ package crypto_test
 import (
 	"testing"
 
-	. "github.com/textileio/go-textile-crypto"
+	. "github.com/textileio/go-textile-core/crypto"
 )
 
 var symmetricTestData = struct {
@@ -11,7 +11,7 @@ var symmetricTestData = struct {
 	key        []byte
 	ciphertext []byte
 }{
-	plaintext: []byte("yoyoyoyo!"),
+	plaintext: []byte("Hello World!!!"),
 }
 
 func TestGenerateAESKey(t *testing.T) {

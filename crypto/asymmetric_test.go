@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	libp2pc "github.com/libp2p/go-libp2p-core/crypto"
-	. "github.com/textileio/go-textile-crypto"
+	. "github.com/textileio/go-textile-core/crypto"
 )
 
 func TestEncryptCurve25519(t *testing.T) {
@@ -26,7 +26,7 @@ func TestEncryptCurve25519(t *testing.T) {
 		return
 	}
 	if string(decryptedPlaintext) != plaintext {
-		t.Error("Result plaintext doesn't match original plaintext")
+		t.Error("result plaintext doesn't match original plaintext")
 	}
 }
 
@@ -56,7 +56,7 @@ func TestDecryptCurve25519(t *testing.T) {
 		return
 	}
 	if "Hello World!!!" != string(plaintext) {
-		t.Error("Result plaintext doesn't match original plaintext")
+		t.Error("result plaintext doesn't match original plaintext")
 		return
 	}
 
@@ -68,6 +68,6 @@ func TestDecryptCurve25519(t *testing.T) {
 	}
 	_, err = Decrypt(privKey, cipherTextInvalidBytes)
 	if err != BoxDecryptionError {
-		t.Error("Failed to catch curve25519 drcyption error")
+		t.Error("failed to catch curve25519 drcyption error")
 	}
 }

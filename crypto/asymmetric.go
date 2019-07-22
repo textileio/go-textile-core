@@ -22,12 +22,46 @@ var (
 	BoxDecryptionError = fmt.Errorf("failed to decrypt curve25519")
 )
 
+// Encrypt bytes with the given public key
 func Encrypt(pubKey libp2pc.PubKey, bytes []byte) ([]byte, error) {
 	ed25519Pubkey, ok := pubKey.(*libp2pc.Ed25519PublicKey)
 	if ok {
 		return encryptCurve25519(ed25519Pubkey, bytes)
 	}
 	return nil, fmt.Errorf("could not determine key type")
+}
+
+// Decrypt ciphertext with the given private key
+func Decrypt(privKey libp2pc.PrivKey, ciphertext []byte) ([]byte, error) {
+	ed25519Privkey, ok := privKey.(*libp2pc.Ed25519PrivateKey)
+	if ok {
+		return decryptCurve25519(ed25519Privkey, ciphertext)
+	}
+	return nil, fmt.Errorf("could not determine key type")
+}
+
+// Verify that 'sig' is the signed hash of 'data'
+func Verify(pk libp2pc.PubKey, data []byte, sig []byte) error {
+	good, err := pk.Verify(data, sig)
+	if err != nil || !good {
+		return fmt.Errorf("bad signature")
+	}
+	return nil
+}
+
+func publicToCurve25519(k *libp2pc.Ed25519PublicKey) (*[32]byte, error) {
+	var cp [32]byte
+	var pk [32]byte
+	r, err := k.Raw()
+	if err != nil {
+		return nil, err
+	}
+	copy(pk[:], r)
+	success := extra.PublicKeyToCurve25519(&cp, &pk)
+	if !success {
+		return nil, fmt.Errorf("error converting ed25519 pubkey to curve25519 pubkey")
+	}
+	return &cp, nil
 }
 
 func encryptCurve25519(pubKey *libp2pc.Ed25519PublicKey, bytes []byte) ([]byte, error) {
@@ -64,29 +98,6 @@ func encryptCurve25519(pubKey *libp2pc.Ed25519PublicKey, bytes []byte) ([]byte, 
 	return ciphertext, nil
 }
 
-func publicToCurve25519(k *libp2pc.Ed25519PublicKey) (*[32]byte, error) {
-	var cp [32]byte
-	var pk [32]byte
-	r, err := k.Raw()
-	if err != nil {
-		return nil, err
-	}
-	copy(pk[:], r)
-	success := extra.PublicKeyToCurve25519(&cp, &pk)
-	if !success {
-		return nil, fmt.Errorf("error converting ed25519 pubkey to curve25519 pubkey")
-	}
-	return &cp, nil
-}
-
-func Decrypt(privKey libp2pc.PrivKey, ciphertext []byte) ([]byte, error) {
-	ed25519Privkey, ok := privKey.(*libp2pc.Ed25519PrivateKey)
-	if ok {
-		return decryptCurve25519(ed25519Privkey, ciphertext)
-	}
-	return nil, fmt.Errorf("could not determine key type")
-}
-
 func decryptCurve25519(privKey *libp2pc.Ed25519PrivateKey, ciphertext []byte) ([]byte, error) {
 	curve25519Privkey, err := privateToCurve25519(privKey)
 	if err != nil {
@@ -116,6 +127,7 @@ func decryptCurve25519(privKey *libp2pc.Ed25519PrivateKey, ciphertext []byte) ([
 	return plaintext, nil
 }
 
+
 func privateToCurve25519(k *libp2pc.Ed25519PrivateKey) (*[32]byte, error) {
 	var cs [32]byte
 	r, err := k.Raw()
@@ -126,12 +138,4 @@ func privateToCurve25519(k *libp2pc.Ed25519PrivateKey) (*[32]byte, error) {
 	copy(sk[:], r)
 	extra.PrivateKeyToCurve25519(&cs, &sk)
 	return &cs, nil
-}
-
-func Verify(pk libp2pc.PubKey, data []byte, sig []byte) error {
-	good, err := pk.Verify(data, sig)
-	if err != nil || !good {
-		return fmt.Errorf("bad signature")
-	}
-	return nil
 }
