@@ -1,0 +1,49 @@
+syntax = "proto3";
+package threads.pb;
+
+import "google/protobuf/timestamp.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.benchgen_all) = true;
+option (gogoproto.populate_all) = true;
+
+message Thread {
+	string id = 1 [(gogoproto.customname) = "ID"];
+	bytes key = 2;
+	string name = 3;
+	repeated string heads = 4;
+}
+
+message Threads {
+	repeated Thread items = 1 [(gogoproto.nullable) = false];
+}
+
+message Node {
+	string id = 1 [(gogoproto.customname) = "ID"];
+	string thread = 2;
+	string target = 3;
+	string author = 4;
+	Type type = 5;
+	google.protobuf.Timestamp date = 6 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
+	Status status = 7;
+	int32 attempts = 8;
+
+	enum Type {
+		INVITE = 0;
+		JOIN = 1;
+		LEAVE = 2;
+		WRITE = 3;
+		REACT = 4;
+		REMOVE = 5;
+	}
+
+	enum Status {
+		READY = 0; // downloaded, also synced if outbound
+		QUEUED = 1; // waiting on sync
+		PENDING = 2; // waiting on download
+	}
+}
+
+message Nodes {
+	repeated Node items = 1 [(gogoproto.nullable) = false];
+}

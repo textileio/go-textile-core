@@ -43,7 +43,28 @@ type Node interface {
 	Parents() []Node
 	Data() format.Node
 
+	Signature() []byte
 	Payload() []byte
+}
+
+type Member interface {
+	Account() account.Account
+	Thread() cid.Cid
+	Welcomed() bool
+}
+
+type Role int
+
+const (
+	NO_ACCESS Role = iota
+	READ
+	ANNOTATE
+	WRITE
+)
+
+type Roles interface {
+	Default()
+	Members() map[account.Account]Role
 }
 
 type Schema interface {
@@ -60,18 +81,4 @@ type Schema interface {
 
 type JSONSchema interface {
 	format.Node
-}
-
-type Role int
-
-const (
-	NO_ACCESS Role = iota
-	READ
-	ANNOTATE
-	WRITE
-)
-
-type Roles interface {
-	Default()
-	Accounts() map[account.Account]Role
 }
