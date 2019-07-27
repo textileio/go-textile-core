@@ -3,6 +3,7 @@ package threads
 import (
 	"github.com/ipfs/go-cid"
 	format "github.com/ipfs/go-ipld-format"
+	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/textileio/go-textile-wallet/account"
 )
 
@@ -11,10 +12,11 @@ type ThreadIntent string
 type Thread interface {
 	format.Node
 
-	Key() []byte
+	ReaderKey() []byte
+	ReplicatorKey() []byte
+
 	Schema() Schema
 	Intent() ThreadIntent
-	Public() bool
 	Roles() Roles
 
 	Heads() []cid.Cid
@@ -27,7 +29,8 @@ type Thread interface {
 
 	Join() error
 	Leave() error
-	Members()
+
+	Logs() []Log
 
 	Write(Node) (cid.Cid, error)
 	Listen() <-chan Node
@@ -45,6 +48,19 @@ type Node interface {
 
 	Signature() []byte
 	Payload() []byte
+}
+
+type Log interface {
+	ID() string // threadID + PeerID ?
+
+	Author() peer.ID
+	Account() account.Account
+
+	Head() cid.Cid
+
+	Put(Node) error
+	List(/* ListOpts */)
+	Remove() error
 }
 
 type Member interface {

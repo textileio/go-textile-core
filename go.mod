@@ -4,6 +4,7 @@ go 1.12
 
 require (
 	github.com/agl/ed25519 v0.0.0-20170116200512-5312a6153412
+	github.com/gogo/protobuf v1.2.1
 	github.com/ipfs/go-cid v0.0.2
 	github.com/ipfs/go-ipld-format v0.0.2
 	github.com/libp2p/go-libp2p-core v0.0.9
