@@ -5,7 +5,7 @@ import (
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-ipld-format"
-	ic "github.com/libp2p/go-libp2p-core/crypto"
+	"github.com/libp2p/go-libp2p-core/peer"
 )
 
 type Node interface {
@@ -26,7 +26,7 @@ type ID string
 
 type Info struct {
 	ID   ID
-	Logs []ic.PubKey
+	Logs peer.IDSlice
 }
 
 type IDSlice []ID
