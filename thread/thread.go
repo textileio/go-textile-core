@@ -17,6 +17,8 @@ type Node interface {
 }
 
 type Metadata interface {
+	format.Node
+
 	MaxAge() time.Duration
 	MaxCount() int
 	ACL() ACL

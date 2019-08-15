@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/ipfs/go-ipld-format"
-	ic "github.com/libp2p/go-libp2p-core/crypto"
+	"github.com/libp2p/go-libp2p-core/peer"
 )
 
 type Event interface {
@@ -18,7 +18,7 @@ type EventHeader interface {
 	format.Node
 
 	Type() []byte
-	Actor() ic.PubKey
+	Actor() peer.ID
 	Doc() string
 	Date() time.Time
 }
