@@ -1,10 +1,8 @@
 package thread
 
 import (
-	"time"
-
+	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-ipld-format"
-	"github.com/libp2p/go-libp2p-core/peer"
 )
 
 type Event interface {
@@ -17,8 +15,6 @@ type Event interface {
 type EventHeader interface {
 	format.Node
 
-	Type() []byte
-	Actor() peer.ID
-	Doc() string
-	Date() time.Time
+	Schema() format.Node
+	Doc() cid.Cid
 }
