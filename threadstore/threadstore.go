@@ -1,6 +1,7 @@
 package threadstore
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -16,9 +17,9 @@ var ErrNotFound = fmt.Errorf("item not found")
 
 // Threadstore stores log keys, addresses, heads and thread meta data
 type Threadstore interface {
-	// Ideally this would be Close, but it overlaps with host.Host's Close
 	Shutdown() error
 
+	ThreadMetadata
 	LogKeyBook
 	LogAddrBook
 	LogHeadBook
@@ -63,6 +64,8 @@ type LogAddrBook interface {
 
 	UpdateAddrs(t thread.ID, p peer.ID, oldTTL time.Duration, newTTL time.Duration)
 	Addrs(thread.ID, peer.ID) []ma.Multiaddr
+
+	AddrStream(context.Context, thread.ID, peer.ID) <-chan ma.Multiaddr
 
 	ClearAddrs(thread.ID, peer.ID)
 
