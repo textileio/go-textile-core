@@ -10,8 +10,10 @@ import (
 	"github.com/textileio/go-textile-core/thread"
 )
 
+// ErrNotFound is and error used to indicate an item is not found
 var ErrNotFound = fmt.Errorf("item not found")
 
+// Threadstore stores log keys, addresses, heads and thread meta data
 type Threadstore interface {
 	// Ideally this would be Close, but it overlaps with host.Host's Close
 	Shutdown() error
@@ -25,11 +27,13 @@ type Threadstore interface {
 	Threads() thread.IDSlice
 }
 
+// ThreadMetadata
 type ThreadMetadata interface {
 	Get(t thread.ID, key string) (interface{}, error)
 	Put(t thread.ID, key string, val interface{}) error
 }
 
+// LogKeyBook stores log keys
 type LogKeyBook interface {
 	LogPubKey(thread.ID, peer.ID) ic.PubKey
 	AddLogPubKey(thread.ID, peer.ID, ic.PubKey) error
@@ -48,6 +52,7 @@ type LogKeyBook interface {
 	ThreadsFromKeys() thread.IDSlice
 }
 
+// LogAddrBook stores log addresses
 type LogAddrBook interface {
 	AddLogAddr(thread.ID, peer.ID, ma.Multiaddr)
 	AddLogAddrs(thread.ID, peer.ID, []ma.Multiaddr)
@@ -65,6 +70,7 @@ type LogAddrBook interface {
 	ThreadsFromAddrs() thread.IDSlice
 }
 
+// LogHeadBook stores log heads
 type LogHeadBook interface {
 	AddLogHead(thread.ID, peer.ID, cid.Cid)
 	AddLogHeads(thread.ID, peer.ID, []cid.Cid)
@@ -82,6 +88,7 @@ type Snapshot struct {
 	Logs map[peer.ID]LogSnapshot
 }
 
+// for the wire, move to pb
 type LogSnapshot struct {
 	PubKey  ic.PubKey
 	PrivKey ic.PrivKey

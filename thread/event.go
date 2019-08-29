@@ -5,6 +5,7 @@ import (
 	"github.com/ipfs/go-ipld-format"
 )
 
+// Event is the  Block format used by Textile threads
 type Event interface {
 	format.Node
 
@@ -12,6 +13,7 @@ type Event interface {
 	Body() format.Node
 }
 
+// EventHeader is the format of the event's header object
 type EventHeader interface {
 	format.Node
 

@@ -9,6 +9,7 @@ import (
 	"github.com/textileio/go-textile-core/threadstore"
 )
 
+// Threadservice is an API for working with threads
 type Threadservice interface {
 	// Thread actor's private key
 	ic.PrivKey
