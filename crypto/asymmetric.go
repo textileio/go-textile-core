@@ -127,7 +127,6 @@ func decryptCurve25519(privKey *libp2pc.Ed25519PrivateKey, ciphertext []byte) ([
 	return plaintext, nil
 }
 
-
 func privateToCurve25519(k *libp2pc.Ed25519PrivateKey) (*[32]byte, error) {
 	var cs [32]byte
 	r, err := k.Raw()
