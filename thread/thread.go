@@ -26,9 +26,6 @@ var (
 	ErrIDTooShort = fmt.Errorf("id too short")
 )
 
-// Size of the underlying random thread ID
-const Size = 16
-
 // Versions
 const (
 	V1 = 0x01
@@ -53,8 +50,8 @@ var VariantToStr = map[uint64]string{
 }
 
 // NewIDV1 returns a new random ID using the given variant.
-func NewIDV1(variant uint64) ID {
-	num := make([]byte, Size)
+func NewIDV1(variant uint64, size uint8) ID {
+	num := make([]byte, size)
 	_, err := rand.Read(num)
 	if err != nil {
 		panic("random read failed")

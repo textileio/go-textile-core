@@ -2,6 +2,7 @@ package threadstore
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/ipfs/go-cid"
 	ic "github.com/libp2p/go-libp2p-core/crypto"
@@ -35,17 +36,17 @@ type ThreadMetadata interface {
 
 // LogKeyBook stores log keys
 type LogKeyBook interface {
-	LogPubKey(thread.ID, peer.ID) ic.PubKey
-	AddLogPubKey(thread.ID, peer.ID, ic.PubKey) error
+	PubKey(thread.ID, peer.ID) ic.PubKey
+	AddPubKey(thread.ID, peer.ID, ic.PubKey) error
 
-	LogPrivKey(thread.ID, peer.ID) ic.PrivKey
-	AddLogPrivKey(thread.ID, peer.ID, ic.PrivKey) error
+	PrivKey(thread.ID, peer.ID) ic.PrivKey
+	AddPrivKey(thread.ID, peer.ID, ic.PrivKey) error
 
-	LogReadKey(thread.ID, peer.ID) []byte
-	AddLogReadKey(thread.ID, peer.ID, []byte) error
+	ReadKey(thread.ID, peer.ID) []byte
+	AddReadKey(thread.ID, peer.ID, []byte) error
 
-	LogFollowKey(thread.ID, peer.ID) []byte
-	AddLogFollowKey(thread.ID, peer.ID, []byte) error
+	FollowKey(thread.ID, peer.ID) []byte
+	AddFollowKey(thread.ID, peer.ID, []byte) error
 
 	LogsWithKeys(thread.ID) peer.IDSlice
 
@@ -54,16 +55,16 @@ type LogKeyBook interface {
 
 // LogAddrBook stores log addresses
 type LogAddrBook interface {
-	AddLogAddr(thread.ID, peer.ID, ma.Multiaddr)
-	AddLogAddrs(thread.ID, peer.ID, []ma.Multiaddr)
+	AddAddr(thread.ID, peer.ID, ma.Multiaddr, time.Duration)
+	AddAddrs(thread.ID, peer.ID, []ma.Multiaddr, time.Duration)
 
-	SetLogAddr(thread.ID, peer.ID, ma.Multiaddr)
-	SetLogAddrs(thread.ID, peer.ID, []ma.Multiaddr)
+	SetAddr(thread.ID, peer.ID, ma.Multiaddr, time.Duration)
+	SetAddrs(thread.ID, peer.ID, []ma.Multiaddr, time.Duration)
 
-	UpdateLogAddrs(t thread.ID, l peer.ID, oldAddr ma.Multiaddr, newAddr ma.Multiaddr)
-	LogAddrs(thread.ID, peer.ID) []ma.Multiaddr
+	UpdateAddrs(t thread.ID, p peer.ID, oldTTL time.Duration, newTTL time.Duration)
+	Addrs(thread.ID, peer.ID) []ma.Multiaddr
 
-	ClearLogAddrs(thread.ID, peer.ID)
+	ClearAddrs(thread.ID, peer.ID)
 
 	LogsWithAddrs(thread.ID) peer.IDSlice
 
@@ -72,15 +73,15 @@ type LogAddrBook interface {
 
 // LogHeadBook stores log heads
 type LogHeadBook interface {
-	AddLogHead(thread.ID, peer.ID, cid.Cid)
-	AddLogHeads(thread.ID, peer.ID, []cid.Cid)
+	AddHead(thread.ID, peer.ID, cid.Cid)
+	AddHeads(thread.ID, peer.ID, []cid.Cid)
 
-	SetLogHead(thread.ID, peer.ID, cid.Cid)
-	SetLogHeads(thread.ID, peer.ID, []cid.Cid)
+	SetHead(thread.ID, peer.ID, cid.Cid)
+	SetHeads(thread.ID, peer.ID, []cid.Cid)
 
-	LogHeads(thread.ID, peer.ID) []cid.Cid
+	Heads(thread.ID, peer.ID) []cid.Cid
 
-	ClearLogHeads(thread.ID, peer.ID)
+	ClearHeads(thread.ID, peer.ID)
 }
 
 // for the wire, move to pb

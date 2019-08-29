@@ -7,7 +7,7 @@ import (
 )
 
 func TestDecode(t *testing.T) {
-	i := NewIDV1(Raw)
+	i := NewIDV1(Raw, 32)
 	t.Logf("New ID: %s", i.String())
 
 	j, err := Decode(i.String())
@@ -19,7 +19,7 @@ func TestDecode(t *testing.T) {
 }
 
 func TestExtractEncoding(t *testing.T) {
-	i := NewIDV1(Raw)
+	i := NewIDV1(Raw, 16)
 
 	e, err := ExtractEncoding(i.String())
 	if err != nil {
@@ -30,7 +30,7 @@ func TestExtractEncoding(t *testing.T) {
 }
 
 func TestID_Version(t *testing.T) {
-	i := NewIDV1(Raw)
+	i := NewIDV1(Raw, 16)
 
 	v := i.Version()
 	if v != V1 {
@@ -41,7 +41,7 @@ func TestID_Version(t *testing.T) {
 }
 
 func TestID_Variant(t *testing.T) {
-	i := NewIDV1(Raw)
+	i := NewIDV1(Raw, 16)
 
 	v := i.Variant()
 	if v != Raw {
@@ -50,7 +50,7 @@ func TestID_Variant(t *testing.T) {
 
 	t.Logf("Variant: %s", VariantToStr[v])
 
-	i = NewIDV1(Textile)
+	i = NewIDV1(Textile, 16)
 
 	v = i.Variant()
 	if v != Textile {
