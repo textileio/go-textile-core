@@ -6,7 +6,7 @@ import (
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/textileio/go-textile-core/thread"
-	"github.com/textileio/go-textile-core/threadstore"
+	tstore "github.com/textileio/go-textile-core/threadstore"
 )
 
 // Threadservice is an API for working with threads
@@ -21,7 +21,7 @@ type Threadservice interface {
 	format.DAGService
 
 	// Threadstore persists thread log details
-	threadstore.Threadstore
+	tstore.Threadstore
 
 	// Put an event to existing threads (creates a new thread if no threads are given)
 	Put(event thread.Event, t ...thread.ID) peer.IDSlice
