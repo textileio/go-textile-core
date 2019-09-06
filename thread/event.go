@@ -1,11 +1,10 @@
 package thread
 
 import (
-	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-ipld-format"
 )
 
-// Event is the  Block format used by Textile threads
+// Event is the Block format used by Textile threads
 type Event interface {
 	format.Node
 
@@ -17,6 +16,6 @@ type Event interface {
 type EventHeader interface {
 	format.Node
 
-	Schema() format.Node
-	Doc() cid.Cid
+	Time() int
+	Key() []byte
 }

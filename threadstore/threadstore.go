@@ -17,7 +17,7 @@ var ErrNotFound = fmt.Errorf("item not found")
 
 // Threadstore stores log keys, addresses, heads and thread meta data
 type Threadstore interface {
-	Shutdown() error
+	Close() error
 
 	ThreadMetadata
 	LogKeyBook
