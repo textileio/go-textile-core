@@ -290,13 +290,11 @@ type Node interface {
 	format.Node
 
 	Block() format.Node
-	Signature() []byte
+	Sig() []byte
 }
 
 // Metadata is a built-in document projected from textile thread events.
 type Metadata interface {
-	format.Node
-
 	MaxAge() time.Duration
 	MaxCount() int
 	ACL() ACL

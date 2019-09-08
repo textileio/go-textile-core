@@ -10,6 +10,8 @@ type Event interface {
 
 	Header() EventHeader
 	Body() format.Node
+
+	Decrypt() (format.Node, error)
 }
 
 // EventHeader is the format of the event's header object

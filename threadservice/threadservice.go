@@ -5,6 +5,7 @@ import (
 	"net"
 	"net/http"
 
+	"github.com/ipfs/go-cid"
 	format "github.com/ipfs/go-ipld-format"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
@@ -30,10 +31,10 @@ type Threadservice interface {
 	Client() *http.Client
 
 	// Put data in existing threads (creates a new thread if no threads are given)
-	Put(ctx context.Context, body format.Node, threads ...thread.ID) ([]thread.Event, error)
+	Put(ctx context.Context, body format.Node, threads ...thread.ID) ([]cid.Cid, error)
 
 	// Pull paginates ordered thread log events
-	Pull(ctx context.Context, offset string, size int, t thread.ID) <-chan []thread.Event
+	Pull(ctx context.Context, offset string, size int, t thread.ID) ([]thread.Event, error)
 
 	// Invite an actor to a thread
 	Invite(ctx context.Context, actor peer.ID, t thread.ID) error
