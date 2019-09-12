@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-ipld-format"
 	"github.com/libp2p/go-libp2p-core/peer"
 	mbase "github.com/multiformats/go-multibase"
@@ -33,20 +34,20 @@ const (
 
 // Variants
 const (
-	Raw     = 0x55
-	Textile = 0x70 // Supports access control lists
+	Raw              = 0x55
+	AccessControlled = 0x70 // Supports access control lists
 )
 
 // Variants maps the name of a variant to its variant
 var Variants = map[string]uint64{
 	"raw":     Raw,
-	"textile": Textile,
+	"textile": AccessControlled,
 }
 
 // VariantToStr maps the numeric variant to its name
 var VariantToStr = map[uint64]string{
-	Raw:     "raw",
-	Textile: "textile",
+	Raw:              "raw",
+	AccessControlled: "access_controlled",
 }
 
 // NewIDV1 returns a new random ID using the given variant.
@@ -71,7 +72,8 @@ func NewIDV1(variant uint64, size uint8) ID {
 }
 
 // ID represents a self-describing thread identifier.
-// It is formed by a Version, a Variant, and a 128-bit random number.
+// It is formed by a Version, a Variant, and a random number
+// of a given length.
 type ID struct{ str string }
 
 // Undef can be used to represent a nil or undefined Cid, using Cid{}
@@ -291,6 +293,7 @@ type Node interface {
 
 	Block() format.Node
 	Sig() []byte
+	Prev() cid.Cid
 }
 
 // Metadata is a built-in document projected from textile thread events.

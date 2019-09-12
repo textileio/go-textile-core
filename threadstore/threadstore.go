@@ -20,9 +20,9 @@ type Threadstore interface {
 	Close() error
 
 	ThreadMetadata
-	LogKeyBook
-	LogAddrBook
-	LogHeadBook
+	KeyBook
+	AddrBook
+	HeadBook
 
 	ThreadInfo(thread.ID) thread.Info
 
@@ -35,56 +35,56 @@ type ThreadMetadata interface {
 	PutMeta(t thread.ID, key string, val interface{}) error
 }
 
-// LogKeyBook stores log keys
-type LogKeyBook interface {
-	LogPubKey(thread.ID, peer.ID) ic.PubKey
-	AddLogPubKey(thread.ID, peer.ID, ic.PubKey) error
+// KeyBook stores log keys
+type KeyBook interface {
+	PubKey(thread.ID, peer.ID) ic.PubKey
+	AddPubKey(thread.ID, peer.ID, ic.PubKey) error
 
-	LogPrivKey(thread.ID, peer.ID) ic.PrivKey
-	AddLogPrivKey(thread.ID, peer.ID, ic.PrivKey) error
+	PrivKey(thread.ID, peer.ID) ic.PrivKey
+	AddPrivKey(thread.ID, peer.ID, ic.PrivKey) error
 
-	LogReadKey(thread.ID, peer.ID) []byte
-	AddLogReadKey(thread.ID, peer.ID, []byte) error
+	ReadKey(thread.ID, peer.ID) []byte
+	AddReadKey(thread.ID, peer.ID, []byte) error
 
-	LogFollowKey(thread.ID, peer.ID) []byte
-	AddLogFollowKey(thread.ID, peer.ID, []byte) error
+	FollowKey(thread.ID, peer.ID) []byte
+	AddFollowKey(thread.ID, peer.ID, []byte) error
 
 	LogsWithKeys(thread.ID) peer.IDSlice
 
 	ThreadsFromKeys() thread.IDSlice
 }
 
-// LogAddrBook stores log addresses
-type LogAddrBook interface {
-	AddLogAddr(thread.ID, peer.ID, ma.Multiaddr, time.Duration)
-	AddLogAddrs(thread.ID, peer.ID, []ma.Multiaddr, time.Duration)
+// AddrBook stores log addresses
+type AddrBook interface {
+	AddAddr(thread.ID, peer.ID, ma.Multiaddr, time.Duration)
+	AddAddrs(thread.ID, peer.ID, []ma.Multiaddr, time.Duration)
 
-	SetLogAddr(thread.ID, peer.ID, ma.Multiaddr, time.Duration)
-	SetLogAddrs(thread.ID, peer.ID, []ma.Multiaddr, time.Duration)
+	SetAddr(thread.ID, peer.ID, ma.Multiaddr, time.Duration)
+	SetAddrs(thread.ID, peer.ID, []ma.Multiaddr, time.Duration)
 
-	UpdateLogAddrs(t thread.ID, p peer.ID, oldTTL time.Duration, newTTL time.Duration)
-	LogAddrs(thread.ID, peer.ID) []ma.Multiaddr
+	UpdateAddrs(t thread.ID, id peer.ID, oldTTL time.Duration, newTTL time.Duration)
+	Addrs(thread.ID, peer.ID) []ma.Multiaddr
 
-	LogAddrStream(context.Context, thread.ID, peer.ID) <-chan ma.Multiaddr
+	AddrStream(context.Context, thread.ID, peer.ID) <-chan ma.Multiaddr
 
-	ClearLogAddrs(thread.ID, peer.ID)
+	ClearAddrs(thread.ID, peer.ID)
 
 	LogsWithAddrs(thread.ID) peer.IDSlice
 
 	ThreadsFromAddrs() thread.IDSlice
 }
 
-// LogHeadBook stores log heads
-type LogHeadBook interface {
-	AddLogHead(thread.ID, peer.ID, cid.Cid)
-	AddLogHeads(thread.ID, peer.ID, []cid.Cid)
+// HeadBook stores log heads
+type HeadBook interface {
+	AddHead(thread.ID, peer.ID, cid.Cid)
+	AddHeads(thread.ID, peer.ID, []cid.Cid)
 
-	SetLogHead(thread.ID, peer.ID, cid.Cid)
-	SetLogHeads(thread.ID, peer.ID, []cid.Cid)
+	SetHead(thread.ID, peer.ID, cid.Cid)
+	SetHeads(thread.ID, peer.ID, []cid.Cid)
 
-	LogHeads(thread.ID, peer.ID) []cid.Cid
+	Heads(thread.ID, peer.ID) []cid.Cid
 
-	ClearLogHeads(thread.ID, peer.ID)
+	ClearHeads(thread.ID, peer.ID)
 }
 
 // for the wire, move to pb

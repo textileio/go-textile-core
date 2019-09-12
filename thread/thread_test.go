@@ -50,10 +50,10 @@ func TestID_Variant(t *testing.T) {
 
 	t.Logf("Variant: %s", VariantToStr[v])
 
-	i = NewIDV1(Textile, 16)
+	i = NewIDV1(AccessControlled, 16)
 
 	v = i.Variant()
-	if v != Textile {
+	if v != AccessControlled {
 		t.Errorf("got wrong variant from %s: %d", i.String(), v)
 	}
 

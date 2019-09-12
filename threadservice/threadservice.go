@@ -15,14 +15,14 @@ import (
 
 // Threadservice is an API for working with threads
 type Threadservice interface {
-	// DAGService provides a DAG API for reading and writing thread logs
-	format.DAGService
-
 	// Threadstore persists thread log details
 	tstore.Threadstore
 
 	// Host provides a network identity
 	Host() host.Host
+
+	// DAGService provides a DAG API for reading and writing thread logs
+	DAGService() format.DAGService
 
 	// Listener is a net listener serving the threads api
 	Listener() net.Listener
@@ -31,10 +31,10 @@ type Threadservice interface {
 	Client() *http.Client
 
 	// Put data in existing threads (creates a new thread if no threads are given)
-	Put(ctx context.Context, body format.Node, threads ...thread.ID) ([]cid.Cid, error)
+	Put(ctx context.Context, body format.Node, opts ...PutOption) (peer.ID, cid.Cid, error)
 
-	// Pull paginates ordered thread log events
-	Pull(ctx context.Context, offset string, size int, t thread.ID) ([]thread.Event, error)
+	// Pull paginates thread log events
+	Pull(ctx context.Context, offset cid.Cid, limit int, t thread.ID, id peer.ID) ([]thread.Event, error)
 
 	// Invite an actor to a thread
 	Invite(ctx context.Context, actor peer.ID, t thread.ID) error
