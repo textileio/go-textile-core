@@ -6,7 +6,9 @@ require (
 	github.com/agl/ed25519 v0.0.0-20170116200512-5312a6153412
 	github.com/gogo/protobuf v1.2.1
 	github.com/ipfs/go-cid v0.0.2
+	github.com/ipfs/go-datastore v0.0.5
 	github.com/ipfs/go-ipld-format v0.0.2
+	github.com/ipfs/go-log v0.0.1
 	github.com/libp2p/go-libp2p-core v0.0.9
 	github.com/multiformats/go-multibase v0.0.1
 	github.com/textileio/go-textile-wallet v0.0.1
