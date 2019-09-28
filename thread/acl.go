@@ -1,8 +1,6 @@
 package thread
 
-import (
-	"github.com/ipfs/go-ipld-format"
-)
+import "github.com/libp2p/go-libp2p-core/peer"
 
 type Role int
 
@@ -15,13 +13,11 @@ const (
 )
 
 type Roles interface {
-	All() Role
-	Actors() map[ID]Role
+	Default() Role
+	Peers() map[peer.ID]Role
 }
 
 type ACL interface {
-	format.Node
-
 	Roles
 	Docs() map[ID]Roles
 }

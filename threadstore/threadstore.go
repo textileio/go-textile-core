@@ -12,10 +12,10 @@ import (
 	"github.com/textileio/go-textile-core/thread"
 )
 
-// ErrNotFound is and error used to indicate an item is not found
+// ErrNotFound is and error used to indicate an item is not found.
 var ErrNotFound = fmt.Errorf("item not found")
 
-// Threadstore stores log keys, addresses, heads and thread meta data
+// Threadstore stores log keys, addresses, heads and thread meta data.
 type Threadstore interface {
 	Close() error
 
@@ -24,18 +24,20 @@ type Threadstore interface {
 	AddrBook
 	HeadBook
 
+	Threads() thread.IDSlice
 	ThreadInfo(thread.ID) thread.Info
 
-	Threads() thread.IDSlice
+	AddLog(thread.ID, thread.LogInfo) error
+	LogInfo(thread.ID, peer.ID) thread.LogInfo
 }
 
-// ThreadMetadata
+// ThreadMetadata stores local thread metadata like name.
 type ThreadMetadata interface {
 	GetMeta(t thread.ID, key string) (interface{}, error)
 	PutMeta(t thread.ID, key string, val interface{}) error
 }
 
-// KeyBook stores log keys
+// KeyBook stores log keys.
 type KeyBook interface {
 	PubKey(thread.ID, peer.ID) ic.PubKey
 	AddPubKey(thread.ID, peer.ID, ic.PubKey) error
@@ -54,7 +56,7 @@ type KeyBook interface {
 	ThreadsFromKeys() thread.IDSlice
 }
 
-// AddrBook stores log addresses
+// AddrBook stores log addresses.
 type AddrBook interface {
 	AddAddr(thread.ID, peer.ID, ma.Multiaddr, time.Duration)
 	AddAddrs(thread.ID, peer.ID, []ma.Multiaddr, time.Duration)
@@ -74,7 +76,7 @@ type AddrBook interface {
 	ThreadsFromAddrs() thread.IDSlice
 }
 
-// HeadBook stores log heads
+// HeadBook stores log heads.
 type HeadBook interface {
 	AddHead(thread.ID, peer.ID, cid.Cid)
 	AddHeads(thread.ID, peer.ID, []cid.Cid)
@@ -85,17 +87,4 @@ type HeadBook interface {
 	Heads(thread.ID, peer.ID) []cid.Cid
 
 	ClearHeads(thread.ID, peer.ID)
-}
-
-// for the wire, move to pb
-type Snapshot struct {
-	Logs map[peer.ID]LogSnapshot
-}
-
-// for the wire, move to pb
-type LogSnapshot struct {
-	PubKey  ic.PubKey
-	PrivKey ic.PrivKey
-	Addrs   []ma.Multiaddr
-	Heads   []cid.Cid
 }

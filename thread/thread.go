@@ -8,7 +8,9 @@ import (
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-ipld-format"
+	ic "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
+	ma "github.com/multiformats/go-multiaddr"
 	mbase "github.com/multiformats/go-multibase"
 )
 
@@ -281,10 +283,21 @@ func (s IDSlice) Len() int           { return len(s) }
 func (s IDSlice) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 func (s IDSlice) Less(i, j int) bool { return s[i].str < s[j].str }
 
-// Info represents a thread and its known logs
+// Info holds a thread ID associated known logs
 type Info struct {
 	ID   ID
 	Logs peer.IDSlice
+}
+
+// LogInfo holds known info about a log
+type LogInfo struct {
+	ID        peer.ID        `json:"id"`
+	PubKey    ic.PubKey      `json:"pub_key"`
+	PrivKey   ic.PrivKey     `json:"priv_key,omitempty"`
+	FollowKey []byte         `json:"follow_key,omitempty"`
+	ReadKey   []byte         `json:"read_key,omitempty"`
+	Addrs     []ma.Multiaddr `json:"addrs"`
+	Heads     []cid.Cid      `json:"heads"`
 }
 
 // Node is the most basic component of a log.
