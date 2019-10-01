@@ -22,11 +22,14 @@ type Threadservice interface {
 	// DAGService provides a DAG API for reading and writing thread logs.
 	DAGService() format.DAGService
 
-	// Put data in existing threads (creates a new thread if no threads are given).
-	Put(ctx context.Context, body format.Node, opts ...PutOption) (peer.ID, cid.Cid, error)
+	// Add data to a thread. Creates a new thread and own log if they don't exist.
+	Add(ctx context.Context, body format.Node, opts ...AddOption) (peer.ID, cid.Cid, error)
+
+	// Put an existing node to a log.
+	Put(ctx context.Context, node thread.Node, opts ...PutOption) error
 
 	// Pull paginates thread log events.
-	Pull(ctx context.Context, offset cid.Cid, limit int, log thread.LogInfo) ([]thread.Event, error)
+	Pull(ctx context.Context, t thread.ID, l peer.ID, opts ...PullOption) ([]thread.Node, error)
 
 	// NewInvite returns a bundle of logs for the given thread.
 	NewInvite(t thread.ID, reader bool) (format.Node, error)
