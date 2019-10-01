@@ -307,6 +307,7 @@ type Node interface {
 	Block() format.Node
 	Sig() []byte
 	Prev() cid.Cid
+	Verify(pk ic.PubKey) error
 }
 
 // Metadata is a built-in document projected from textile thread events.
