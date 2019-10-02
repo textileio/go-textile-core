@@ -11,7 +11,7 @@ message BotResponse {
     string content_type = 3;
 }
 
-message SharedConfig {
+message ClientConfig {
     uint32 bot_store_server = 1; 
     uint32 ipfs_handler_server = 2; 
     map<string, string> params = 3;
@@ -19,13 +19,13 @@ message SharedConfig {
 
 message APIRequest {
     bytes data = 1;
-    SharedConfig setup = 2;
+    ClientConfig setup = 2;
 }
 
 message APIRequestB {
     bytes data = 1;
     bytes body = 2;
-    SharedConfig setup = 3;
+    ClientConfig setup = 3;
 }
 
 message Success {
