@@ -7,6 +7,14 @@ type BotConfig struct {
 	BotID          string
 	ReleaseVersion int
 	ReleaseHash    string
+	Params         map[string]string
+}
+
+// SharedConfig contain all the services and config passed by the host node
+type SharedConfig struct {
+	Store  BotStore
+	Ipfs   IpfsHandler
+	Params map[string]string
 }
 
 // Response is the response for each request to a Bot
@@ -32,8 +40,8 @@ type IpfsHandler interface {
 }
 
 type Botservice interface {
-	Post(data []byte, body []byte, s BotStore, i IpfsHandler) (Response, error)
-	Get(data []byte, s BotStore, i IpfsHandler) (Response, error)
-	Put(data []byte, body []byte, s BotStore, i IpfsHandler) (Response, error)
-	Delete(data []byte, s BotStore, i IpfsHandler) (Response, error)
+	Post(data []byte, body []byte, shared SharedConfig) (Response, error)
+	Get(data []byte, shared SharedConfig) (Response, error)
+	Put(data []byte, body []byte, shared SharedConfig) (Response, error)
+	Delete(data []byte, shared SharedConfig) (Response, error)
 }
