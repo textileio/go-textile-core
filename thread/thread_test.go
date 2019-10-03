@@ -50,7 +50,7 @@ func TestID_Variant(t *testing.T) {
 
 	t.Logf("Variant: %s", VariantToStr[v])
 
-	i = NewIDV1(AccessControlled, 16)
+	i = NewIDV1(AccessControlled, 32)
 
 	v = i.Variant()
 	if v != AccessControlled {

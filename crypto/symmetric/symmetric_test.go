@@ -1,48 +1,48 @@
-package crypto_test
+package symmetric_test
 
 import (
 	"testing"
 
-	. "github.com/textileio/go-textile-core/crypto"
+	. "github.com/textileio/go-textile-core/crypto/symmetric"
 )
 
 var symmetricTestData = struct {
+	key        *Key
 	plaintext  []byte
-	key        []byte
 	ciphertext []byte
 }{
 	plaintext: []byte("Hello World!!!"),
 }
 
-func TestGenerateAESKey(t *testing.T) {
-	key, err := GenerateAESKey()
+func TestNewKey(t *testing.T) {
+	key, err := CreateKey()
 	if err != nil {
 		t.Fatal(err)
 	}
 	symmetricTestData.key = key
 }
 
-func TestEncryptAES(t *testing.T) {
-	ciphertext, err := EncryptAES(symmetricTestData.plaintext, symmetricTestData.key)
+func TestEncrypt(t *testing.T) {
+	ciphertext, err := symmetricTestData.key.Encrypt(symmetricTestData.plaintext)
 	if err != nil {
 		t.Fatal(err)
 	}
 	symmetricTestData.ciphertext = ciphertext
 }
 
-func TestDecryptAES(t *testing.T) {
-	plaintext, err := DecryptAES(symmetricTestData.ciphertext, symmetricTestData.key)
+func TestDecrypt(t *testing.T) {
+	plaintext, err := symmetricTestData.key.Decrypt(symmetricTestData.ciphertext)
 	if err != nil {
 		t.Fatal(err)
 	}
 	if string(symmetricTestData.plaintext) != string(plaintext) {
 		t.Error("decrypt AES failed")
 	}
-	key, err := GenerateAESKey()
+	key, err := CreateKey()
 	if err != nil {
 		t.Fatal(err)
 	}
-	plaintext, err = DecryptAES(symmetricTestData.ciphertext, key)
+	plaintext, err = key.Decrypt(symmetricTestData.ciphertext)
 	if err == nil {
 		t.Error("decrypt AES with bad key succeeded")
 	}

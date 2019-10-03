@@ -2,10 +2,7 @@ package threadservice
 
 import (
 	"context"
-	"net"
-	"net/http"
 
-	"github.com/ipfs/go-cid"
 	format "github.com/ipfs/go-ipld-format"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
@@ -13,35 +10,29 @@ import (
 	tstore "github.com/textileio/go-textile-core/threadstore"
 )
 
-// Threadservice is an API for working with threads
+// Threadservice is an API for working with threads.
 type Threadservice interface {
-	// Threadstore persists thread log details
+	// Threadstore persists thread log details.
 	tstore.Threadstore
 
-	// Host provides a network identity
+	// Host provides a network identity.
 	Host() host.Host
 
-	// DAGService provides a DAG API for reading and writing thread logs
+	// DAGService provides a DAG API for reading and writing thread logs.
 	DAGService() format.DAGService
 
-	// Listener is a net listener serving the threads api
-	Listener() net.Listener
+	// Add data to a thread. Creates a new thread and own log if they don't exist.
+	Add(ctx context.Context, body format.Node, opts ...AddOption) (peer.ID, thread.Node, error)
 
-	// Client exposes a libp2p-router http client
-	Client() *http.Client
+	// Put an existing node to a log.
+	Put(ctx context.Context, node thread.Node, opts ...PutOption) error
 
-	// Put data in existing threads (creates a new thread if no threads are given)
-	Put(ctx context.Context, body format.Node, opts ...PutOption) (peer.ID, cid.Cid, error)
+	// Pull paginates thread log events.
+	Pull(ctx context.Context, t thread.ID, l peer.ID, opts ...PullOption) ([]thread.Node, error)
 
-	// Pull paginates thread log events
-	Pull(ctx context.Context, offset cid.Cid, limit int, t thread.ID, id peer.ID) ([]thread.Event, error)
+	// Logs returns info for each log in the given thread.
+	Logs(t thread.ID) []thread.LogInfo
 
-	// Invite an actor to a thread
-	Invite(ctx context.Context, actor peer.ID, t thread.ID) error
-
-	// Leave a thread
-	Leave(context.Context, thread.ID) error
-
-	// Delete a thread (requires ACL check)
+	// Delete a thread.
 	Delete(context.Context, thread.ID) error
 }

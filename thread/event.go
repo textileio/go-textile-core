@@ -1,23 +1,39 @@
 package thread
 
 import (
+	"context"
+	"time"
+
+	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-ipld-format"
+	"github.com/textileio/go-textile-core/crypto"
 )
 
 // Event is the Block format used by Textile threads
 type Event interface {
 	format.Node
 
-	Header() EventHeader
-	Body() format.Node
+	// HeaderID returns the cid of the event header.
+	HeaderID() cid.Cid
 
-	Decrypt() (format.Node, error)
+	// GetHeader loads and optionally decrypts the event header.
+	// If no key is given, the header time and key methods will return an error.
+	GetHeader(context.Context, format.DAGService, crypto.DecryptionKey) (EventHeader, error)
+
+	// BodyID returns the cid of the event body.
+	BodyID() cid.Cid
+
+	// GetBody loads and optionally decrypts the event body.
+	GetBody(context.Context, format.DAGService, crypto.DecryptionKey) (format.Node, error)
 }
 
 // EventHeader is the format of the event's header object
 type EventHeader interface {
 	format.Node
 
-	Time() int
-	Key() []byte
+	// Time returns the wall-clock time at which this event was created.
+	Time() (*time.Time, error)
+
+	// Key returns a single-use decryption key for the event body.
+	Key() (crypto.DecryptionKey, error)
 }
