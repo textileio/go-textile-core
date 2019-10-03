@@ -14,11 +14,7 @@ func TestEncrypt(t *testing.T) {
 		t.Error(err)
 	}
 
-	rawpk, err := ic.MarshalPublicKey(pub)
-	if err != nil {
-		t.Error(err)
-	}
-	ek, err := NewEncryptionKey(rawpk)
+	ek, err := NewEncryptionKey(pub)
 	if err != nil {
 		t.Error(err)
 	}
@@ -30,11 +26,7 @@ func TestEncrypt(t *testing.T) {
 		return
 	}
 
-	rawsk, err := ic.MarshalPrivateKey(priv)
-	if err != nil {
-		t.Error(err)
-	}
-	dk, err := NewDecryptionKey(rawsk)
+	dk, err := NewDecryptionKey(priv)
 	if err != nil {
 		t.Error(err)
 	}
@@ -58,7 +50,12 @@ func TestDecrypt(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	dk, err := NewDecryptionKey(privKeyBytes)
+	sk, err := ic.UnmarshalPrivateKey(privKeyBytes)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	dk, err := NewDecryptionKey(sk)
 	if err != nil {
 		t.Error(err)
 		return

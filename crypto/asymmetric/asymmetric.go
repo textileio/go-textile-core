@@ -28,10 +28,9 @@ type EncryptionKey struct {
 }
 
 // NewEncryptionKey returns a key by parsing k into a public key.
-func NewEncryptionKey(k []byte) (*EncryptionKey, error) {
-	pk, err := ic.UnmarshalPublicKey(k)
-	if err != nil {
-		return nil, err
+func NewEncryptionKey(pk ic.PubKey) (*EncryptionKey, error) {
+	if _, ok := pk.(*ic.Ed25519PublicKey); !ok {
+		return nil, fmt.Errorf("could not determine key type")
 	}
 	return &EncryptionKey{pk: pk}, nil
 }
@@ -52,10 +51,9 @@ type DecryptionKey struct {
 }
 
 // NewDecryptionKey returns a key by parsing k into a private key.
-func NewDecryptionKey(k []byte) (*DecryptionKey, error) {
-	sk, err := ic.UnmarshalPrivateKey(k)
-	if err != nil {
-		return nil, err
+func NewDecryptionKey(sk ic.PrivKey) (*DecryptionKey, error) {
+	if _, ok := sk.(*ic.Ed25519PrivateKey); !ok {
+		return nil, fmt.Errorf("could not determine key type")
 	}
 	return &DecryptionKey{sk: sk}, nil
 }

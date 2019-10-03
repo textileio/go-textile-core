@@ -1,10 +1,10 @@
 package thread
 
 import (
+	"context"
 	"crypto/rand"
 	"encoding/binary"
 	"fmt"
-	"time"
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-ipld-format"
@@ -14,39 +14,59 @@ import (
 	mbase "github.com/multiformats/go-multibase"
 )
 
+// Node is the most basic component of a log.
+type Node interface {
+	format.Node
+
+	// BlockID returns the cid of the node block.
+	BlockID() cid.Cid
+
+	// GetBlock loads the node block.
+	GetBlock(context.Context, format.DAGService) (format.Node, error)
+
+	// PrevID returns the cid of the previous node.
+	PrevID() cid.Cid
+
+	// Sig returns the node signature.
+	Sig() []byte
+
+	// Verify returns a non-nil error if the node signature is valid.
+	Verify(pk ic.PubKey) error
+}
+
 var (
 	// ErrVarintBuffSmall means that a buffer passed to the ID parser was not
-	// long enough, or did not contain an invalid ID
+	// long enough, or did not contain an invalid ID.
 	ErrVarintBuffSmall = fmt.Errorf("reading varint: buffer too small")
 
 	// ErrVarintTooBig means that the varint in the given ID was above the
-	// limit of 2^64
+	// limit of 2^64.
 	ErrVarintTooBig = fmt.Errorf("reading varint: varint bigger than 64bits" +
 		" and not supported")
 
 	// ErrIDTooShort means that the ID passed to decode was not long
-	// enough to be a valid ID
+	// enough to be a valid ID.
 	ErrIDTooShort = fmt.Errorf("id too short")
 )
 
-// Versions
+// Versions.
 const (
 	V1 = 0x01
 )
 
-// Variants
+// Variants.
 const (
 	Raw              = 0x55
 	AccessControlled = 0x70 // Supports access control lists
 )
 
-// Variants maps the name of a variant to its variant
+// Variants maps the name of a variant to its variant.
 var Variants = map[string]uint64{
 	"raw":     Raw,
 	"textile": AccessControlled,
 }
 
-// VariantToStr maps the numeric variant to its name
+// VariantToStr maps the numeric variant to its name.
 var VariantToStr = map[uint64]string{
 	Raw:              "raw",
 	AccessControlled: "access_controlled",
@@ -218,7 +238,7 @@ func (i ID) String() string {
 }
 
 // String returns the string representation of an ID
-// encoded is selected base
+// encoded is selected base.
 func (i ID) StringOfBase(base mbase.Encoding) (string, error) {
 	switch i.Version() {
 	case V1:
@@ -263,7 +283,7 @@ func (i ID) Equals(o ID) bool {
 	return i == o
 }
 
-// KeyString returns the binary representation of the ID as a string
+// KeyString returns the binary representation of the ID as a string.
 func (i ID) KeyString() string {
 	return i.str
 }
@@ -276,43 +296,26 @@ func (i ID) Loggable() map[string]interface{} {
 	}
 }
 
-// IDSlice for sorting threads
+// IDSlice for sorting threads.
 type IDSlice []ID
 
 func (s IDSlice) Len() int           { return len(s) }
 func (s IDSlice) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 func (s IDSlice) Less(i, j int) bool { return s[i].str < s[j].str }
 
-// Info holds a thread ID associated known logs
+// Info holds a thread ID associated known logs.
 type Info struct {
 	ID   ID
 	Logs peer.IDSlice
 }
 
-// LogInfo holds known info about a log
+// LogInfo holds known info about a log.
 type LogInfo struct {
-	ID        peer.ID        `json:"id"`
-	PubKey    ic.PubKey      `json:"pub_key"`
-	PrivKey   ic.PrivKey     `json:"priv_key,omitempty"`
-	FollowKey []byte         `json:"follow_key,omitempty"`
-	ReadKey   []byte         `json:"read_key,omitempty"`
-	Addrs     []ma.Multiaddr `json:"addrs"`
-	Heads     []cid.Cid      `json:"heads"`
-}
-
-// Node is the most basic component of a log.
-type Node interface {
-	format.Node
-
-	Block() format.Node
-	Sig() []byte
-	Prev() cid.Cid
-	Verify(pk ic.PubKey) error
-}
-
-// Metadata is a built-in document projected from textile thread events.
-type Metadata interface {
-	MaxAge() time.Duration
-	MaxCount() int
-	ACL() ACL
+	ID        peer.ID
+	PubKey    ic.PubKey
+	PrivKey   ic.PrivKey
+	FollowKey []byte
+	ReadKey   []byte
+	Addrs     []ma.Multiaddr
+	Heads     []cid.Cid
 }

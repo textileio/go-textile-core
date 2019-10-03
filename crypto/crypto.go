@@ -3,25 +3,31 @@ package crypto
 import (
 	"fmt"
 
+	ic "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/textileio/go-textile-core/crypto/asymmetric"
 	"github.com/textileio/go-textile-core/crypto/symmetric"
 )
 
+// EncryptionKey represents a key that can be used for encryption.
 type EncryptionKey interface {
 	Encrypt([]byte) ([]byte, error)
 	Marshal() ([]byte, error)
 }
 
+// EncryptionKey represents a key that can be used for decryption.
 type DecryptionKey interface {
 	EncryptionKey
 	Decrypt([]byte) ([]byte, error)
 }
 
-// ParseEncryptionKey
+// ParseEncryptionKey returns an EncryptionKey from k.
 func ParseEncryptionKey(k []byte) (EncryptionKey, error) {
-	aek, err := asymmetric.NewEncryptionKey(k)
+	pk, err := ic.UnmarshalPublicKey(k)
 	if err == nil {
-		return aek, nil
+		aek, err := asymmetric.NewEncryptionKey(pk)
+		if err == nil {
+			return aek, nil
+		}
 	}
 	sk, err := symmetric.NewKey(k)
 	if err == nil {
@@ -31,10 +37,14 @@ func ParseEncryptionKey(k []byte) (EncryptionKey, error) {
 	return nil, fmt.Errorf("parse encryption key failed")
 }
 
+// ParseDecryptionKey returns a DecryptionKey from k.
 func ParseDecryptionKey(k []byte) (DecryptionKey, error) {
-	adk, err := asymmetric.NewDecryptionKey(k)
+	pk, err := ic.UnmarshalPrivateKey(k)
 	if err == nil {
-		return adk, nil
+		adk, err := asymmetric.NewDecryptionKey(pk)
+		if err == nil {
+			return adk, nil
+		}
 	}
 	sk, err := symmetric.NewKey(k)
 	if err == nil {
