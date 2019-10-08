@@ -22,13 +22,13 @@ type Threadservice interface {
 	DAGService() format.DAGService
 
 	// Add data to a thread. Creates a new thread and own log if they don't exist.
-	Add(ctx context.Context, body format.Node, opts ...AddOption) (peer.ID, thread.Node, error)
+	Add(ctx context.Context, body format.Node, opts ...AddOption) (peer.ID, thread.Record, error)
 
 	// Put an existing node to a log.
-	Put(ctx context.Context, node thread.Node, opts ...PutOption) error
+	Put(ctx context.Context, node thread.Record, opts ...PutOption) error
 
 	// Pull paginates thread log events.
-	Pull(ctx context.Context, t thread.ID, l peer.ID, opts ...PullOption) ([]thread.Node, error)
+	Pull(ctx context.Context, t thread.ID, l peer.ID, opts ...PullOption) ([]thread.Record, error)
 
 	// Logs returns info for each log in the given thread.
 	Logs(t thread.ID) []thread.LogInfo
