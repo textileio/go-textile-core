@@ -3,6 +3,15 @@ package pb;
 
 message Empty {}
 
+// HostConfig is the config file shared from the Bot to the host on init
+message HostConfig {
+    string name = 1;
+    string id = 2;
+    string release_version = 3;
+    string release_hash = 4;
+    map<string, string> params = 5;
+}
+
 // Response is the response for each request to a Bot
 message BotResponse {
     int32 status = 1;
@@ -11,17 +20,20 @@ message BotResponse {
     string content_type = 3;
 }
 
+// ClientConfig are the host managed elements shared with the client
 message ClientConfig {
     uint32 bot_store_server = 1; 
     uint32 ipfs_handler_server = 2; 
     map<string, string> params = 3;
 }
 
+// APIRequest containing only a data request [GET, DELETE]
 message APIRequest {
     bytes data = 1;
     ClientConfig setup = 2;
 }
 
+// APIRequestB containing only a body [POST, PUT]
 message APIRequestB {
     bytes data = 1;
     bytes body = 2;
@@ -36,6 +48,7 @@ message ByteData {
     bytes data = 1;
 }
 
+// IPFSPin content hash // path and an optional ("" if nil) key for decryption
 message IPFSPin {
     string hash = 1;
     string key = 2;
@@ -90,4 +103,16 @@ service Botservice {
 	rpc Put(APIRequestB) returns (BotResponse);
 	rpc Delete(APIRequest) returns (BotResponse);
 	// TODO: add cleanup/cron entry
+}
+
+// ActiveBot is the basic setup information about a running bot
+message ActiveBot {
+    string id                  = 1;
+    string name                = 2;
+    map<string, string> params = 3;
+}
+
+// ActiveBotList a list of ActiveBot
+message ActiveBotList {
+    repeated ActiveBot items = 1;
 }
