@@ -31,10 +31,20 @@ func (AddOption) Time(val time.Time) AddOption {
 }
 
 // Key sets the read encryption key used for an add operation.
-// If no key is given, the target log's read key is used.
+// If both KeyLog and this option are absent, the target log's read key is used.
+// This option takes precedence over KeyLogID.
 func (AddOption) Key(val crypto.EncryptionKey) AddOption {
 	return func(settings *AddSettings) {
 		settings.Key = val
+	}
+}
+
+// KeyLog sets the read encryption key used for an add operation
+// to the read key of the given log ID.
+// If both Key and this option are absent, the target log's read key is used.
+func (AddOption) KeyLog(val peer.ID) AddOption {
+	return func(settings *AddSettings) {
+		settings.KeyLog = val
 	}
 }
 
@@ -50,6 +60,7 @@ type AddSettings struct {
 	Thread thread.ID
 	Time   time.Time
 	Key    crypto.EncryptionKey
+	KeyLog peer.ID
 	Addrs  []ma.Multiaddr
 }
 
