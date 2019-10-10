@@ -3,6 +3,7 @@ package threadservice
 import (
 	"context"
 
+	"github.com/ipfs/go-cid"
 	format "github.com/ipfs/go-ipld-format"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
@@ -28,11 +29,11 @@ type Threadservice interface {
 	Put(ctx context.Context, node thread.Record, opts ...PutOption) error
 
 	// Pull paginates thread log events.
-	Pull(ctx context.Context, t thread.ID, l peer.ID, opts ...PullOption) ([]thread.Record, error)
+	Pull(ctx context.Context, id thread.ID, lid peer.ID, offset cid.Cid, opts ...PullOption) ([]thread.Record, error)
 
 	// Logs returns info for each log in the given thread.
-	Logs(t thread.ID) []thread.LogInfo
+	Logs(id thread.ID) []thread.LogInfo
 
 	// Delete a thread.
-	Delete(context.Context, thread.ID) error
+	Delete(ctx context.Context, id thread.ID) error
 }

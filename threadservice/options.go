@@ -3,7 +3,6 @@ package threadservice
 import (
 	"time"
 
-	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
 	"github.com/textileio/go-textile-core/crypto"
@@ -121,13 +120,6 @@ var PullOpt PullOption
 // PullOption is used to create PullSettings.
 type PullOption func(*PullSettings)
 
-// Offset sets the node ID at which to start a pull operation.
-func (PullOption) Offset(val cid.Cid) PullOption {
-	return func(settings *PullSettings) {
-		settings.Offset = val
-	}
-}
-
 // Limit sets the upper limit of nodes to return during a pull operation.
 func (PullOption) Limit(val int) PullOption {
 	return func(settings *PullSettings) {
@@ -137,15 +129,13 @@ func (PullOption) Limit(val int) PullOption {
 
 // PullSettings holds values used for a pull operation.
 type PullSettings struct {
-	Offset cid.Cid
-	Limit  int
+	Limit int
 }
 
 // PullOptions returns pull settings from options.
 func PullOptions(opts ...PullOption) *PullSettings {
 	options := &PullSettings{
-		Offset: cid.Undef,
-		Limit:  -1,
+		Limit: -1,
 	}
 
 	for _, opt := range opts {
