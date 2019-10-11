@@ -41,7 +41,7 @@ jobs:
 
 workflows:
   version: 2
-  go-textile:
+  go-textile-core:
     jobs:
       - persist-checkout:
           filters:
