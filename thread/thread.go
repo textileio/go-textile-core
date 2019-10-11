@@ -14,8 +14,8 @@ import (
 	mbase "github.com/multiformats/go-multibase"
 )
 
-// Node is the most basic component of a log.
-type Node interface {
+// Record is the most basic component of a log.
+type Record interface {
 	format.Node
 
 	// BlockID returns the cid of the node block.

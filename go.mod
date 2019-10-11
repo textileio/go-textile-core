@@ -1,15 +1,16 @@
 module github.com/textileio/go-textile-core
 
-go 1.12
+go 1.13
 
 require (
 	github.com/agl/ed25519 v0.0.0-20170116200512-5312a6153412
-	github.com/golang/protobuf v1.2.0
-	github.com/ipfs/go-cid v0.0.2
+	github.com/golang/protobuf v1.3.1
+	github.com/ipfs/go-cid v0.0.3
 	github.com/ipfs/go-ipld-format v0.0.2
-	github.com/libp2p/go-libp2p-core v0.0.9
-	github.com/multiformats/go-multiaddr v0.0.4
+	github.com/libp2p/go-libp2p-core v0.2.3
+	github.com/multiformats/go-multiaddr v0.1.1
 	github.com/multiformats/go-multibase v0.0.1
-	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4
-	google.golang.org/grpc v1.19.0
+	golang.org/x/crypto v0.0.0-20190923035154-9ee001bba392
+	golang.org/x/net v0.0.0-20190620200207-3b0461eec859
+	google.golang.org/grpc v1.21.1
 )
