@@ -113,3 +113,33 @@ func PutOptions(opts ...PutOption) *PutSettings {
 	}
 	return options
 }
+
+// ListenOpt is an instance helper for creating listen options.
+var ListenOpt ListenOption
+
+// ListenOption is used to create ListenSettings.
+type ListenOption func(*ListenSettings)
+
+// Thread restricts the listener to the given thread.
+// Use this option multiple times to build up a list of threads
+// to listen to.
+func (ListenOption) Thread(val thread.ID) ListenOption {
+	return func(settings *ListenSettings) {
+		settings.Threads = append(settings.Threads, val)
+	}
+}
+
+// ListenSettings holds values used for a listen operation.
+type ListenSettings struct {
+	Threads []thread.ID
+}
+
+// ListenOptions returns listen settings from options.
+func ListenOptions(opts ...ListenOption) *ListenSettings {
+	options := &ListenSettings{}
+
+	for _, opt := range opts {
+		opt(options)
+	}
+	return options
+}

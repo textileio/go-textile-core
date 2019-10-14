@@ -138,7 +138,7 @@ func (l *Listener) Discard() {
 	delete(l.b.listeners, l.id)
 }
 
-// Channel returns the channel that receives broadcast messages
+// Channel returns the channel that receives broadcast messages.
 func (l *Listener) Channel() <-chan interface{} {
 	return l.ch
 }
