@@ -113,33 +113,3 @@ func PutOptions(opts ...PutOption) *PutSettings {
 	}
 	return options
 }
-
-// PullOpt is an instance helper for creating pull options.
-var PullOpt PullOption
-
-// PullOption is used to create PullSettings.
-type PullOption func(*PullSettings)
-
-// Limit sets the upper limit of nodes to return during a pull operation.
-func (PullOption) Limit(val int) PullOption {
-	return func(settings *PullSettings) {
-		settings.Limit = val
-	}
-}
-
-// PullSettings holds values used for a pull operation.
-type PullSettings struct {
-	Limit int
-}
-
-// PullOptions returns pull settings from options.
-func PullOptions(opts ...PullOption) *PullSettings {
-	options := &PullSettings{
-		Limit: -1,
-	}
-
-	for _, opt := range opts {
-		opt(options)
-	}
-	return options
-}

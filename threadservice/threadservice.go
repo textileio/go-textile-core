@@ -16,24 +16,39 @@ type Threadservice interface {
 	// Threadstore persists thread log details.
 	tstore.Threadstore
 
-	// Host provides a network identity.
+	// Host provides a network listener identity.
 	Host() host.Host
 
 	// DAGService provides a DAG API for reading and writing thread logs.
 	DAGService() format.DAGService
 
-	// Add data to a thread. Creates a new thread and own log if they don't exist.
-	Add(ctx context.Context, body format.Node, opts ...AddOption) (peer.ID, thread.Record, error)
+	// Add a new record by wrapping body. See AddOption for more.
+	Add(ctx context.Context, body format.Node, opts ...AddOption) (*Record, error)
 
-	// Put an existing node to a log.
+	// Put an existing record. See PutOption for more.
 	Put(ctx context.Context, node thread.Record, opts ...PutOption) error
 
-	// Pull paginates thread log events.
-	Pull(ctx context.Context, id thread.ID, lid peer.ID, offset cid.Cid, opts ...PullOption) ([]thread.Record, error)
+	// Get returns the record at cid.
+	Get(ctx context.Context, id thread.ID, lid peer.ID, rid cid.Cid) (thread.Record, error)
 
-	// Logs returns info for each log in the given thread.
-	Logs(id thread.ID) ([]thread.LogInfo, error)
+	// Updates returns a read-only channel of updates.
+	Updates() <-chan *Record
 
-	// Delete a thread.
+	// Pull for new records from the given thread.
+	// Logs owned by this host are traversed locally.
+	// Remotely addressed logs are pulled from the network.
+	Pull(ctx context.Context, id thread.ID) error
+
+	// GetLogs returns info about the logs in the given thread.
+	GetLogs(id thread.ID) []thread.LogInfo
+
+	// Delete the given thread.
 	Delete(ctx context.Context, id thread.ID) error
+}
+
+// Record is used to wrap a thread.Record with its thread and log context.
+type Record struct {
+	ThreadID thread.ID
+	LogID    peer.ID
+	Record   thread.Record
 }
