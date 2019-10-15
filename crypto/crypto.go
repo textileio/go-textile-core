@@ -10,13 +10,18 @@ import (
 
 // EncryptionKey represents a key that can be used for encryption.
 type EncryptionKey interface {
+	// Encrypt bytes.
 	Encrypt([]byte) ([]byte, error)
+
+	// Marshal to bytes.
 	Marshal() ([]byte, error)
 }
 
 // EncryptionKey represents a key that can be used for decryption.
 type DecryptionKey interface {
 	EncryptionKey
+
+	// Decrypt bytes.
 	Decrypt([]byte) ([]byte, error)
 }
 
