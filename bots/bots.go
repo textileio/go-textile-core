@@ -1,7 +1,11 @@
-// Package shared contains shared data between the host and plugins.
+// Package bots contains shared data between the host and plugins.
 package bots
 
-// BotConfig is pulled from the bot config file
+import (
+	"github.com/ipfs/go-datastore"
+)
+
+// HostConfig is pulled from the bot config file
 type HostConfig struct {
 	Name           string
 	ID             string
@@ -12,7 +16,7 @@ type HostConfig struct {
 
 // ClientConfig contain all the services and config passed by the host node
 type ClientConfig struct {
-	Store  Store
+	Store  datastore.Datastore
 	Ipfs   Ipfs
 	Params map[string]string
 }
@@ -22,15 +26,6 @@ type Response struct {
 	Status      int32
 	Body        []byte
 	ContentType string
-}
-
-// Store is an interface that should be provided by the Cafe to get/set to a storage backend
-type Store interface {
-	// TODO: stored data []byte might be better as json or json string objects?
-	Set(key string, data []byte) (ok bool, err error)
-	Get(key string) (data []byte, version int32, err error)
-	Delete(key string) (ok bool, err error)
-	// TODO: how to manage cleanup? e.g. expired links should be removed occasionally
 }
 
 // Ipfs is an interface to the gateway method to fetch + decrypt content
