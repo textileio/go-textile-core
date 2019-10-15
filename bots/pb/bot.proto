@@ -40,10 +40,6 @@ message APIRequestB {
     ClientConfig setup = 3;
 }
 
-message Success {
-    bool success = 1;
-}
-
 message ByteData {
     bytes data = 1;
 }
@@ -57,8 +53,6 @@ message IPFSPin {
 message KeyValResponse {
     // The value written at this Key
     bytes data = 1;
-    // The bot's release version when value was last updated (allowing migrations)
-    int32 version = 2;
 }
 
 message SetByKey {
@@ -84,8 +78,8 @@ message AddData {
 service BotStore {
 	// TODO: stored data []byte might be better as json or json string objects?
 	rpc Get(ByKey) returns (KeyValResponse);
-	rpc Set(SetByKey) returns (Success);
-	rpc Delete(ByKey) returns (Success);
+	rpc Put(SetByKey) returns (Empty);
+	rpc Delete(ByKey) returns (Empty);
 	// TODO: add cleanup/cron method
 }
 
