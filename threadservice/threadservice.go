@@ -32,7 +32,7 @@ type Threadservice interface {
 	Pull(ctx context.Context, id thread.ID, lid peer.ID, offset cid.Cid, opts ...PullOption) ([]thread.Record, error)
 
 	// Logs returns info for each log in the given thread.
-	Logs(id thread.ID) []thread.LogInfo
+	Logs(id thread.ID) ([]thread.LogInfo, error)
 
 	// Delete a thread.
 	Delete(ctx context.Context, id thread.ID) error
