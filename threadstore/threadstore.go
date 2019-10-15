@@ -24,11 +24,11 @@ type Threadstore interface {
 	AddrBook
 	HeadBook
 
-	Threads() thread.IDSlice
-	ThreadInfo(thread.ID) thread.Info
+	Threads() (thread.IDSlice, error)
+	ThreadInfo(thread.ID) (thread.Info, error)
 
 	AddLog(thread.ID, thread.LogInfo) error
-	LogInfo(thread.ID, peer.ID) thread.LogInfo
+	LogInfo(thread.ID, peer.ID) (thread.LogInfo, error)
 }
 
 // ThreadMetadata stores local thread metadata like name.
