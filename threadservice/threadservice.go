@@ -40,7 +40,7 @@ type Threadservice interface {
 	Pull(ctx context.Context, id thread.ID) error
 
 	// GetLogs returns info about the logs in the given thread.
-	GetLogs(id thread.ID) []thread.LogInfo
+	GetLogs(id thread.ID) ([]thread.LogInfo, error)
 
 	// Delete the given thread.
 	Delete(ctx context.Context, id thread.ID) error
