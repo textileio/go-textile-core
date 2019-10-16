@@ -7,6 +7,7 @@ require (
 	github.com/golang/protobuf v1.3.1
 	github.com/hashicorp/go-multierror v1.0.0
 	github.com/ipfs/go-cid v0.0.3
+	github.com/ipfs/go-datastore v0.1.1
 	github.com/ipfs/go-ipld-format v0.0.2
 	github.com/libp2p/go-libp2p-core v0.2.3
 	github.com/multiformats/go-multiaddr v0.1.1
