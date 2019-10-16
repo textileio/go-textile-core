@@ -83,7 +83,11 @@ func (b *Broadcaster) SendWithTimeout(v interface{}, timeout time.Duration) erro
 			result = multierror.Append(result, errors.New(err))
 		}
 	}
-	return result.ErrorOrNil()
+	if result != nil {
+		return result.ErrorOrNil()
+	} else {
+		return nil
+	}
 }
 
 // Send broadcasts a message to each listener's channel.
@@ -138,7 +142,7 @@ func (l *Listener) Discard() {
 	delete(l.b.listeners, l.id)
 }
 
-// Channel returns the channel that receives broadcast messages
+// Channel returns the channel that receives broadcast messages.
 func (l *Listener) Channel() <-chan interface{} {
 	return l.ch
 }

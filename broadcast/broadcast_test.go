@@ -42,7 +42,7 @@ func TestSend(t *testing.T) {
 		wg.Done()
 	})
 	wg.Add(N)
-	b.Send(testStr)
+	_ = b.Send(testStr)
 	wg.Wait()
 }
 
@@ -73,9 +73,11 @@ func TestListenAndSendOnClosed(t *testing.T) {
 	b.Listen()
 	err := b.Send(testStr)
 	if err != ErrClosedChannel {
-		t.Errorf("Test should raise closed channel error: %s", err.Error())
+		if err != nil {
+			t.Errorf("Test should raise closed channel error: %s", err.Error())
+		}
 	}
-	if err.Error() != "send after close" {
+	if err == nil || err.Error() != "send after close" {
 		t.Error("Test should raise `send after close`")
 	}
 }
@@ -86,9 +88,11 @@ func TestListenAndSendOnCloseWithTimeout(t *testing.T) {
 	b.Listen()
 	err := b.SendWithTimeout(testStr, 0)
 	if err != ErrClosedChannel {
-		t.Errorf("Test should raise closed channel error: %s", err.Error())
+		if err != nil {
+			t.Errorf("Test should raise closed channel error: %s", err.Error())
+		}
 	}
-	if err.Error() != "send after close" {
+	if err == nil || err.Error() != "send after close" {
 		t.Error("Test should raise `send after close`")
 	}
 }
@@ -130,7 +134,7 @@ func TestBroadcasterClose(t *testing.T) {
 		l := b.Listen()
 		wg.Done()
 		select {
-		case _, ok := (<-l.Channel()):
+		case _, ok := <-l.Channel():
 			if ok {
 				t.Error("receive after close")
 			}
@@ -164,6 +168,6 @@ func TestListenerClose(t *testing.T) {
 		wg.Done()
 	})
 	wg.Add(N)
-	b.Send(testStr)
+	_ = b.Send(testStr)
 	wg.Wait()
 }
