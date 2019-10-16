@@ -3,13 +3,14 @@
 
 package pb
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
-
 import (
-	context "golang.org/x/net/context"
+	context "context"
+	fmt "fmt"
+	proto "github.com/golang/protobuf/proto"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -21,7 +22,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Empty struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -33,16 +34,17 @@ func (m *Empty) Reset()         { *m = Empty{} }
 func (m *Empty) String() string { return proto.CompactTextString(m) }
 func (*Empty) ProtoMessage()    {}
 func (*Empty) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{0}
+	return fileDescriptor_51d7d70385167023, []int{0}
 }
+
 func (m *Empty) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Empty.Unmarshal(m, b)
 }
 func (m *Empty) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Empty.Marshal(b, m, deterministic)
 }
-func (dst *Empty) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Empty.Merge(dst, src)
+func (m *Empty) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Empty.Merge(m, src)
 }
 func (m *Empty) XXX_Size() int {
 	return xxx_messageInfo_Empty.Size(m)
@@ -69,16 +71,17 @@ func (m *HostConfig) Reset()         { *m = HostConfig{} }
 func (m *HostConfig) String() string { return proto.CompactTextString(m) }
 func (*HostConfig) ProtoMessage()    {}
 func (*HostConfig) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{1}
+	return fileDescriptor_51d7d70385167023, []int{1}
 }
+
 func (m *HostConfig) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_HostConfig.Unmarshal(m, b)
 }
 func (m *HostConfig) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_HostConfig.Marshal(b, m, deterministic)
 }
-func (dst *HostConfig) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_HostConfig.Merge(dst, src)
+func (m *HostConfig) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_HostConfig.Merge(m, src)
 }
 func (m *HostConfig) XXX_Size() int {
 	return xxx_messageInfo_HostConfig.Size(m)
@@ -139,16 +142,17 @@ func (m *BotResponse) Reset()         { *m = BotResponse{} }
 func (m *BotResponse) String() string { return proto.CompactTextString(m) }
 func (*BotResponse) ProtoMessage()    {}
 func (*BotResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{2}
+	return fileDescriptor_51d7d70385167023, []int{2}
 }
+
 func (m *BotResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BotResponse.Unmarshal(m, b)
 }
 func (m *BotResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BotResponse.Marshal(b, m, deterministic)
 }
-func (dst *BotResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BotResponse.Merge(dst, src)
+func (m *BotResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BotResponse.Merge(m, src)
 }
 func (m *BotResponse) XXX_Size() int {
 	return xxx_messageInfo_BotResponse.Size(m)
@@ -194,16 +198,17 @@ func (m *ClientConfig) Reset()         { *m = ClientConfig{} }
 func (m *ClientConfig) String() string { return proto.CompactTextString(m) }
 func (*ClientConfig) ProtoMessage()    {}
 func (*ClientConfig) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{3}
+	return fileDescriptor_51d7d70385167023, []int{3}
 }
+
 func (m *ClientConfig) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClientConfig.Unmarshal(m, b)
 }
 func (m *ClientConfig) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ClientConfig.Marshal(b, m, deterministic)
 }
-func (dst *ClientConfig) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ClientConfig.Merge(dst, src)
+func (m *ClientConfig) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ClientConfig.Merge(m, src)
 }
 func (m *ClientConfig) XXX_Size() int {
 	return xxx_messageInfo_ClientConfig.Size(m)
@@ -248,16 +253,17 @@ func (m *APIRequest) Reset()         { *m = APIRequest{} }
 func (m *APIRequest) String() string { return proto.CompactTextString(m) }
 func (*APIRequest) ProtoMessage()    {}
 func (*APIRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{4}
+	return fileDescriptor_51d7d70385167023, []int{4}
 }
+
 func (m *APIRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_APIRequest.Unmarshal(m, b)
 }
 func (m *APIRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_APIRequest.Marshal(b, m, deterministic)
 }
-func (dst *APIRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_APIRequest.Merge(dst, src)
+func (m *APIRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_APIRequest.Merge(m, src)
 }
 func (m *APIRequest) XXX_Size() int {
 	return xxx_messageInfo_APIRequest.Size(m)
@@ -296,16 +302,17 @@ func (m *APIRequestB) Reset()         { *m = APIRequestB{} }
 func (m *APIRequestB) String() string { return proto.CompactTextString(m) }
 func (*APIRequestB) ProtoMessage()    {}
 func (*APIRequestB) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{5}
+	return fileDescriptor_51d7d70385167023, []int{5}
 }
+
 func (m *APIRequestB) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_APIRequestB.Unmarshal(m, b)
 }
 func (m *APIRequestB) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_APIRequestB.Marshal(b, m, deterministic)
 }
-func (dst *APIRequestB) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_APIRequestB.Merge(dst, src)
+func (m *APIRequestB) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_APIRequestB.Merge(m, src)
 }
 func (m *APIRequestB) XXX_Size() int {
 	return xxx_messageInfo_APIRequestB.Size(m)
@@ -337,44 +344,6 @@ func (m *APIRequestB) GetSetup() *ClientConfig {
 	return nil
 }
 
-type Success struct {
-	Success              bool     `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *Success) Reset()         { *m = Success{} }
-func (m *Success) String() string { return proto.CompactTextString(m) }
-func (*Success) ProtoMessage()    {}
-func (*Success) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{6}
-}
-func (m *Success) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Success.Unmarshal(m, b)
-}
-func (m *Success) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Success.Marshal(b, m, deterministic)
-}
-func (dst *Success) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Success.Merge(dst, src)
-}
-func (m *Success) XXX_Size() int {
-	return xxx_messageInfo_Success.Size(m)
-}
-func (m *Success) XXX_DiscardUnknown() {
-	xxx_messageInfo_Success.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Success proto.InternalMessageInfo
-
-func (m *Success) GetSuccess() bool {
-	if m != nil {
-		return m.Success
-	}
-	return false
-}
-
 type ByteData struct {
 	Data                 []byte   `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -386,16 +355,17 @@ func (m *ByteData) Reset()         { *m = ByteData{} }
 func (m *ByteData) String() string { return proto.CompactTextString(m) }
 func (*ByteData) ProtoMessage()    {}
 func (*ByteData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{7}
+	return fileDescriptor_51d7d70385167023, []int{6}
 }
+
 func (m *ByteData) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ByteData.Unmarshal(m, b)
 }
 func (m *ByteData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ByteData.Marshal(b, m, deterministic)
 }
-func (dst *ByteData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ByteData.Merge(dst, src)
+func (m *ByteData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ByteData.Merge(m, src)
 }
 func (m *ByteData) XXX_Size() int {
 	return xxx_messageInfo_ByteData.Size(m)
@@ -426,16 +396,17 @@ func (m *IPFSPin) Reset()         { *m = IPFSPin{} }
 func (m *IPFSPin) String() string { return proto.CompactTextString(m) }
 func (*IPFSPin) ProtoMessage()    {}
 func (*IPFSPin) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{8}
+	return fileDescriptor_51d7d70385167023, []int{7}
 }
+
 func (m *IPFSPin) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IPFSPin.Unmarshal(m, b)
 }
 func (m *IPFSPin) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_IPFSPin.Marshal(b, m, deterministic)
 }
-func (dst *IPFSPin) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_IPFSPin.Merge(dst, src)
+func (m *IPFSPin) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IPFSPin.Merge(m, src)
 }
 func (m *IPFSPin) XXX_Size() int {
 	return xxx_messageInfo_IPFSPin.Size(m)
@@ -462,9 +433,7 @@ func (m *IPFSPin) GetKey() string {
 
 type KeyValResponse struct {
 	// The value written at this Key
-	Data []byte `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	// The bot's release version when value was last updated (allowing migrations)
-	Version              int32    `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
+	Data                 []byte   `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -474,16 +443,17 @@ func (m *KeyValResponse) Reset()         { *m = KeyValResponse{} }
 func (m *KeyValResponse) String() string { return proto.CompactTextString(m) }
 func (*KeyValResponse) ProtoMessage()    {}
 func (*KeyValResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{9}
+	return fileDescriptor_51d7d70385167023, []int{8}
 }
+
 func (m *KeyValResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_KeyValResponse.Unmarshal(m, b)
 }
 func (m *KeyValResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_KeyValResponse.Marshal(b, m, deterministic)
 }
-func (dst *KeyValResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_KeyValResponse.Merge(dst, src)
+func (m *KeyValResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_KeyValResponse.Merge(m, src)
 }
 func (m *KeyValResponse) XXX_Size() int {
 	return xxx_messageInfo_KeyValResponse.Size(m)
@@ -501,95 +471,129 @@ func (m *KeyValResponse) GetData() []byte {
 	return nil
 }
 
-func (m *KeyValResponse) GetVersion() int32 {
-	if m != nil {
-		return m.Version
-	}
-	return 0
-}
-
-type SetByKey struct {
+type DatastoreKeyValue struct {
 	Key                  string   `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Data                 []byte   `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	Value                []byte   `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *SetByKey) Reset()         { *m = SetByKey{} }
-func (m *SetByKey) String() string { return proto.CompactTextString(m) }
-func (*SetByKey) ProtoMessage()    {}
-func (*SetByKey) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{10}
-}
-func (m *SetByKey) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_SetByKey.Unmarshal(m, b)
-}
-func (m *SetByKey) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_SetByKey.Marshal(b, m, deterministic)
-}
-func (dst *SetByKey) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SetByKey.Merge(dst, src)
-}
-func (m *SetByKey) XXX_Size() int {
-	return xxx_messageInfo_SetByKey.Size(m)
-}
-func (m *SetByKey) XXX_DiscardUnknown() {
-	xxx_messageInfo_SetByKey.DiscardUnknown(m)
+func (m *DatastoreKeyValue) Reset()         { *m = DatastoreKeyValue{} }
+func (m *DatastoreKeyValue) String() string { return proto.CompactTextString(m) }
+func (*DatastoreKeyValue) ProtoMessage()    {}
+func (*DatastoreKeyValue) Descriptor() ([]byte, []int) {
+	return fileDescriptor_51d7d70385167023, []int{9}
 }
 
-var xxx_messageInfo_SetByKey proto.InternalMessageInfo
+func (m *DatastoreKeyValue) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DatastoreKeyValue.Unmarshal(m, b)
+}
+func (m *DatastoreKeyValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DatastoreKeyValue.Marshal(b, m, deterministic)
+}
+func (m *DatastoreKeyValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DatastoreKeyValue.Merge(m, src)
+}
+func (m *DatastoreKeyValue) XXX_Size() int {
+	return xxx_messageInfo_DatastoreKeyValue.Size(m)
+}
+func (m *DatastoreKeyValue) XXX_DiscardUnknown() {
+	xxx_messageInfo_DatastoreKeyValue.DiscardUnknown(m)
+}
 
-func (m *SetByKey) GetKey() string {
+var xxx_messageInfo_DatastoreKeyValue proto.InternalMessageInfo
+
+func (m *DatastoreKeyValue) GetKey() string {
 	if m != nil {
 		return m.Key
 	}
 	return ""
 }
 
-func (m *SetByKey) GetData() []byte {
+func (m *DatastoreKeyValue) GetValue() []byte {
 	if m != nil {
-		return m.Data
+		return m.Value
 	}
 	return nil
 }
 
-type ByKey struct {
+type StructKey struct {
 	Key                  string   `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ByKey) Reset()         { *m = ByKey{} }
-func (m *ByKey) String() string { return proto.CompactTextString(m) }
-func (*ByKey) ProtoMessage()    {}
-func (*ByKey) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{11}
-}
-func (m *ByKey) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ByKey.Unmarshal(m, b)
-}
-func (m *ByKey) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ByKey.Marshal(b, m, deterministic)
-}
-func (dst *ByKey) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ByKey.Merge(dst, src)
-}
-func (m *ByKey) XXX_Size() int {
-	return xxx_messageInfo_ByKey.Size(m)
-}
-func (m *ByKey) XXX_DiscardUnknown() {
-	xxx_messageInfo_ByKey.DiscardUnknown(m)
+func (m *StructKey) Reset()         { *m = StructKey{} }
+func (m *StructKey) String() string { return proto.CompactTextString(m) }
+func (*StructKey) ProtoMessage()    {}
+func (*StructKey) Descriptor() ([]byte, []int) {
+	return fileDescriptor_51d7d70385167023, []int{10}
 }
 
-var xxx_messageInfo_ByKey proto.InternalMessageInfo
+func (m *StructKey) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_StructKey.Unmarshal(m, b)
+}
+func (m *StructKey) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_StructKey.Marshal(b, m, deterministic)
+}
+func (m *StructKey) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StructKey.Merge(m, src)
+}
+func (m *StructKey) XXX_Size() int {
+	return xxx_messageInfo_StructKey.Size(m)
+}
+func (m *StructKey) XXX_DiscardUnknown() {
+	xxx_messageInfo_StructKey.DiscardUnknown(m)
+}
 
-func (m *ByKey) GetKey() string {
+var xxx_messageInfo_StructKey proto.InternalMessageInfo
+
+func (m *StructKey) GetKey() string {
 	if m != nil {
 		return m.Key
 	}
 	return ""
+}
+
+type DatastoreKey struct {
+	Struct               *StructKey `protobuf:"bytes,1,opt,name=struct,proto3" json:"struct,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *DatastoreKey) Reset()         { *m = DatastoreKey{} }
+func (m *DatastoreKey) String() string { return proto.CompactTextString(m) }
+func (*DatastoreKey) ProtoMessage()    {}
+func (*DatastoreKey) Descriptor() ([]byte, []int) {
+	return fileDescriptor_51d7d70385167023, []int{11}
+}
+
+func (m *DatastoreKey) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DatastoreKey.Unmarshal(m, b)
+}
+func (m *DatastoreKey) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DatastoreKey.Marshal(b, m, deterministic)
+}
+func (m *DatastoreKey) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DatastoreKey.Merge(m, src)
+}
+func (m *DatastoreKey) XXX_Size() int {
+	return xxx_messageInfo_DatastoreKey.Size(m)
+}
+func (m *DatastoreKey) XXX_DiscardUnknown() {
+	xxx_messageInfo_DatastoreKey.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DatastoreKey proto.InternalMessageInfo
+
+func (m *DatastoreKey) GetStruct() *StructKey {
+	if m != nil {
+		return m.Struct
+	}
+	return nil
 }
 
 type GetData struct {
@@ -604,16 +608,17 @@ func (m *GetData) Reset()         { *m = GetData{} }
 func (m *GetData) String() string { return proto.CompactTextString(m) }
 func (*GetData) ProtoMessage()    {}
 func (*GetData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{12}
+	return fileDescriptor_51d7d70385167023, []int{12}
 }
+
 func (m *GetData) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetData.Unmarshal(m, b)
 }
 func (m *GetData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_GetData.Marshal(b, m, deterministic)
 }
-func (dst *GetData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetData.Merge(dst, src)
+func (m *GetData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetData.Merge(m, src)
 }
 func (m *GetData) XXX_Size() int {
 	return xxx_messageInfo_GetData.Size(m)
@@ -650,16 +655,17 @@ func (m *AddData) Reset()         { *m = AddData{} }
 func (m *AddData) String() string { return proto.CompactTextString(m) }
 func (*AddData) ProtoMessage()    {}
 func (*AddData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{13}
+	return fileDescriptor_51d7d70385167023, []int{13}
 }
+
 func (m *AddData) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AddData.Unmarshal(m, b)
 }
 func (m *AddData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AddData.Marshal(b, m, deterministic)
 }
-func (dst *AddData) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddData.Merge(dst, src)
+func (m *AddData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddData.Merge(m, src)
 }
 func (m *AddData) XXX_Size() int {
 	return xxx_messageInfo_AddData.Size(m)
@@ -684,6 +690,84 @@ func (m *AddData) GetEncrypt() bool {
 	return false
 }
 
+type DatastoreSize struct {
+	Size                 int32    `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DatastoreSize) Reset()         { *m = DatastoreSize{} }
+func (m *DatastoreSize) String() string { return proto.CompactTextString(m) }
+func (*DatastoreSize) ProtoMessage()    {}
+func (*DatastoreSize) Descriptor() ([]byte, []int) {
+	return fileDescriptor_51d7d70385167023, []int{14}
+}
+
+func (m *DatastoreSize) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DatastoreSize.Unmarshal(m, b)
+}
+func (m *DatastoreSize) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DatastoreSize.Marshal(b, m, deterministic)
+}
+func (m *DatastoreSize) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DatastoreSize.Merge(m, src)
+}
+func (m *DatastoreSize) XXX_Size() int {
+	return xxx_messageInfo_DatastoreSize.Size(m)
+}
+func (m *DatastoreSize) XXX_DiscardUnknown() {
+	xxx_messageInfo_DatastoreSize.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DatastoreSize proto.InternalMessageInfo
+
+func (m *DatastoreSize) GetSize() int32 {
+	if m != nil {
+		return m.Size
+	}
+	return 0
+}
+
+type Exists struct {
+	Exists               bool     `protobuf:"varint,1,opt,name=exists,proto3" json:"exists,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Exists) Reset()         { *m = Exists{} }
+func (m *Exists) String() string { return proto.CompactTextString(m) }
+func (*Exists) ProtoMessage()    {}
+func (*Exists) Descriptor() ([]byte, []int) {
+	return fileDescriptor_51d7d70385167023, []int{15}
+}
+
+func (m *Exists) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Exists.Unmarshal(m, b)
+}
+func (m *Exists) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Exists.Marshal(b, m, deterministic)
+}
+func (m *Exists) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Exists.Merge(m, src)
+}
+func (m *Exists) XXX_Size() int {
+	return xxx_messageInfo_Exists.Size(m)
+}
+func (m *Exists) XXX_DiscardUnknown() {
+	xxx_messageInfo_Exists.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Exists proto.InternalMessageInfo
+
+func (m *Exists) GetExists() bool {
+	if m != nil {
+		return m.Exists
+	}
+	return false
+}
+
 // ActiveBot is the basic setup information about a running bot
 type ActiveBot struct {
 	Id                   string            `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -698,16 +782,17 @@ func (m *ActiveBot) Reset()         { *m = ActiveBot{} }
 func (m *ActiveBot) String() string { return proto.CompactTextString(m) }
 func (*ActiveBot) ProtoMessage()    {}
 func (*ActiveBot) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{14}
+	return fileDescriptor_51d7d70385167023, []int{16}
 }
+
 func (m *ActiveBot) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ActiveBot.Unmarshal(m, b)
 }
 func (m *ActiveBot) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ActiveBot.Marshal(b, m, deterministic)
 }
-func (dst *ActiveBot) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ActiveBot.Merge(dst, src)
+func (m *ActiveBot) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ActiveBot.Merge(m, src)
 }
 func (m *ActiveBot) XXX_Size() int {
 	return xxx_messageInfo_ActiveBot.Size(m)
@@ -751,16 +836,17 @@ func (m *ActiveBotList) Reset()         { *m = ActiveBotList{} }
 func (m *ActiveBotList) String() string { return proto.CompactTextString(m) }
 func (*ActiveBotList) ProtoMessage()    {}
 func (*ActiveBotList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bot_de304fd6a777e0e9, []int{15}
+	return fileDescriptor_51d7d70385167023, []int{17}
 }
+
 func (m *ActiveBotList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ActiveBotList.Unmarshal(m, b)
 }
 func (m *ActiveBotList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ActiveBotList.Marshal(b, m, deterministic)
 }
-func (dst *ActiveBotList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ActiveBotList.Merge(dst, src)
+func (m *ActiveBotList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ActiveBotList.Merge(m, src)
 }
 func (m *ActiveBotList) XXX_Size() int {
 	return xxx_messageInfo_ActiveBotList.Size(m)
@@ -787,17 +873,75 @@ func init() {
 	proto.RegisterMapType((map[string]string)(nil), "pb.ClientConfig.ParamsEntry")
 	proto.RegisterType((*APIRequest)(nil), "pb.APIRequest")
 	proto.RegisterType((*APIRequestB)(nil), "pb.APIRequestB")
-	proto.RegisterType((*Success)(nil), "pb.Success")
 	proto.RegisterType((*ByteData)(nil), "pb.ByteData")
 	proto.RegisterType((*IPFSPin)(nil), "pb.IPFSPin")
 	proto.RegisterType((*KeyValResponse)(nil), "pb.KeyValResponse")
-	proto.RegisterType((*SetByKey)(nil), "pb.SetByKey")
-	proto.RegisterType((*ByKey)(nil), "pb.ByKey")
+	proto.RegisterType((*DatastoreKeyValue)(nil), "pb.DatastoreKeyValue")
+	proto.RegisterType((*StructKey)(nil), "pb.StructKey")
+	proto.RegisterType((*DatastoreKey)(nil), "pb.DatastoreKey")
 	proto.RegisterType((*GetData)(nil), "pb.GetData")
 	proto.RegisterType((*AddData)(nil), "pb.AddData")
+	proto.RegisterType((*DatastoreSize)(nil), "pb.DatastoreSize")
+	proto.RegisterType((*Exists)(nil), "pb.Exists")
 	proto.RegisterType((*ActiveBot)(nil), "pb.ActiveBot")
 	proto.RegisterMapType((map[string]string)(nil), "pb.ActiveBot.ParamsEntry")
 	proto.RegisterType((*ActiveBotList)(nil), "pb.ActiveBotList")
+}
+
+func init() { proto.RegisterFile("bot.proto", fileDescriptor_51d7d70385167023) }
+
+var fileDescriptor_51d7d70385167023 = []byte{
+	// 796 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x55, 0xdd, 0x8e, 0xdb, 0x44,
+	0x14, 0x96, 0xed, 0xcd, 0x26, 0x39, 0x4e, 0xd2, 0xdd, 0xe1, 0x47, 0x21, 0xa2, 0x10, 0xbc, 0xd0,
+	0x06, 0x21, 0x05, 0x11, 0x8a, 0xf8, 0xbb, 0x4a, 0xb6, 0x4b, 0xb3, 0x2a, 0x17, 0x91, 0x83, 0x7a,
+	0x05, 0x8a, 0x9c, 0xf8, 0x94, 0x58, 0x24, 0x1e, 0xe3, 0x39, 0x89, 0x70, 0xdf, 0x85, 0x97, 0xe0,
+	0x6d, 0x78, 0x06, 0x1e, 0x81, 0x1b, 0x34, 0xc7, 0x63, 0xc7, 0x4d, 0x43, 0xf7, 0xa6, 0x77, 0x67,
+	0xbe, 0xf3, 0xcd, 0xe7, 0x99, 0x6f, 0xce, 0x39, 0x86, 0xe6, 0x52, 0xd2, 0x30, 0x49, 0x25, 0x49,
+	0x61, 0x27, 0x4b, 0xaf, 0x0e, 0xb5, 0x9b, 0x6d, 0x42, 0x99, 0xf7, 0x8f, 0x05, 0x30, 0x95, 0x8a,
+	0xae, 0x65, 0xfc, 0x3c, 0xfa, 0x55, 0x08, 0x38, 0x8b, 0x83, 0x2d, 0x76, 0xad, 0xbe, 0x35, 0x68,
+	0xfa, 0x1c, 0x8b, 0x0e, 0xd8, 0x51, 0xd8, 0xb5, 0x19, 0xb1, 0xa3, 0x50, 0x3c, 0x84, 0x7b, 0x29,
+	0x6e, 0x30, 0x50, 0xb8, 0xd8, 0x63, 0xaa, 0x22, 0x19, 0x77, 0x1d, 0x4e, 0x76, 0x0c, 0xfc, 0x2c,
+	0x47, 0xc5, 0x47, 0xd0, 0x2a, 0x88, 0xeb, 0x40, 0xad, 0xbb, 0x67, 0xcc, 0x72, 0x0d, 0x36, 0x0d,
+	0xd4, 0x5a, 0x8c, 0xe0, 0x3c, 0x09, 0xd2, 0x60, 0xab, 0xba, 0xb5, 0xbe, 0x33, 0x70, 0x47, 0xbd,
+	0x61, 0xb2, 0x1c, 0x1e, 0xce, 0x33, 0x9c, 0x71, 0xf2, 0x26, 0xa6, 0x34, 0xf3, 0x0d, 0xb3, 0xf7,
+	0x2d, 0xb8, 0x15, 0x58, 0x5c, 0x80, 0xf3, 0x1b, 0x66, 0xe6, 0xc4, 0x3a, 0x14, 0x6f, 0x43, 0x6d,
+	0x1f, 0x6c, 0x76, 0x68, 0xce, 0x9c, 0x2f, 0xbe, 0xb3, 0xbf, 0xb1, 0xbc, 0x9f, 0xc1, 0x9d, 0x48,
+	0xf2, 0x51, 0x25, 0x32, 0x56, 0x28, 0xde, 0x85, 0x73, 0x45, 0x01, 0xed, 0x14, 0xef, 0xae, 0xf9,
+	0x66, 0xa5, 0x5d, 0x58, 0xca, 0x30, 0xe3, 0xfd, 0x2d, 0x9f, 0x63, 0x7d, 0x99, 0x95, 0x8c, 0x09,
+	0x63, 0x5a, 0x50, 0x96, 0xa0, 0xb9, 0xb2, 0x6b, 0xb0, 0x9f, 0xb2, 0x04, 0xbd, 0xbf, 0x2d, 0x68,
+	0x5d, 0x6f, 0x22, 0x8c, 0x0b, 0x37, 0x07, 0x70, 0xb1, 0x94, 0xb4, 0x50, 0x24, 0x53, 0x5c, 0x28,
+	0x4c, 0xf7, 0x98, 0xf2, 0x97, 0xda, 0x7e, 0x67, 0x29, 0x69, 0xae, 0xe1, 0x39, 0xa3, 0x62, 0x08,
+	0x6f, 0x45, 0xc9, 0x73, 0xb5, 0x58, 0x07, 0x71, 0xb8, 0xc1, 0xb4, 0x20, 0xdb, 0x4c, 0xbe, 0xd4,
+	0xa9, 0x69, 0x9e, 0x31, 0xfc, 0x47, 0xa5, 0x6f, 0x0e, 0xfb, 0xf6, 0xbe, 0xf6, 0xad, 0xfa, 0xed,
+	0x37, 0xed, 0xdc, 0x14, 0x60, 0x3c, 0xbb, 0xf5, 0xf1, 0xf7, 0x1d, 0x2a, 0xd2, 0x06, 0x85, 0x01,
+	0x05, 0xbc, 0xb5, 0xe5, 0x73, 0x2c, 0x1e, 0x40, 0x4d, 0x21, 0xed, 0x12, 0xde, 0xeb, 0x8e, 0x2e,
+	0x8e, 0x4f, 0xe4, 0xe7, 0x69, 0xef, 0x17, 0x70, 0x0f, 0x4a, 0x93, 0x93, 0x52, 0xa7, 0xfc, 0x2f,
+	0xe5, 0x9d, 0xd7, 0xcb, 0x7f, 0x00, 0x8d, 0x49, 0x46, 0xf8, 0xd8, 0xe8, 0x1c, 0x6b, 0x7b, 0x9f,
+	0x43, 0xfd, 0x76, 0xf6, 0xc3, 0x7c, 0x16, 0xc5, 0x3a, 0xcd, 0x75, 0x69, 0x8a, 0x5d, 0xc7, 0x85,
+	0x27, 0x76, 0xe9, 0x89, 0xf7, 0x31, 0x74, 0x9e, 0x62, 0xf6, 0x2c, 0xd8, 0x94, 0x65, 0x73, 0x4a,
+	0xf6, 0x7b, 0xb8, 0xd4, 0x9f, 0xe4, 0xa7, 0xce, 0xe9, 0x3b, 0xbc, 0xcb, 0xe0, 0x96, 0x31, 0xd8,
+	0xbb, 0x0f, 0xcd, 0x39, 0xa5, 0xbb, 0x15, 0x3d, 0xc5, 0x13, 0xaf, 0xe2, 0x7d, 0x05, 0xad, 0xaa,
+	0xb6, 0xf8, 0x44, 0x97, 0xad, 0xa6, 0x33, 0xc9, 0x1d, 0xb5, 0xb5, 0x17, 0xa5, 0x80, 0x6f, 0x92,
+	0xfa, 0xa6, 0x4f, 0x90, 0x0a, 0x23, 0x92, 0x80, 0xca, 0x9b, 0xea, 0xf8, 0xc4, 0x4d, 0xbf, 0x86,
+	0xfa, 0x38, 0x0c, 0xff, 0xcf, 0x39, 0xd1, 0x85, 0x3a, 0xc6, 0xab, 0x34, 0x4b, 0x88, 0x37, 0x35,
+	0xfc, 0x62, 0xe9, 0x5d, 0x41, 0xbb, 0x3c, 0xe0, 0x3c, 0x7a, 0xc1, 0x0e, 0xa9, 0xe8, 0x05, 0x9a,
+	0xb6, 0xe2, 0xd8, 0xeb, 0xc3, 0xf9, 0xcd, 0x1f, 0x91, 0x22, 0xa5, 0xdb, 0x0e, 0x39, 0xe2, 0x7c,
+	0xc3, 0x37, 0x2b, 0xef, 0x4f, 0x0b, 0x9a, 0xe3, 0x15, 0x45, 0x7b, 0x9c, 0x48, 0x32, 0x63, 0xc7,
+	0x2a, 0xc7, 0x4e, 0x31, 0x9a, 0xec, 0xca, 0x68, 0xfa, 0xe2, 0xa8, 0x0d, 0xde, 0xd3, 0x4e, 0x94,
+	0x12, 0x6f, 0xba, 0x07, 0x1e, 0x41, 0xbb, 0xd4, 0xfe, 0x31, 0x52, 0x24, 0xae, 0xa0, 0x16, 0x11,
+	0x6e, 0xf5, 0x3d, 0x9c, 0xe2, 0x1d, 0x4a, 0x86, 0x9f, 0xe7, 0x46, 0xff, 0x5a, 0xd0, 0x98, 0x98,
+	0x6e, 0x17, 0x9f, 0x81, 0xf3, 0x04, 0x49, 0x70, 0xf5, 0x56, 0xdf, 0xb4, 0x27, 0x34, 0x72, 0x54,
+	0x67, 0x0f, 0xc1, 0x99, 0xed, 0x48, 0xbc, 0x73, 0x4c, 0xe6, 0xe2, 0xea, 0x35, 0x35, 0xcc, 0x43,
+	0x5c, 0x17, 0xc4, 0x63, 0xdc, 0x20, 0xe1, 0x09, 0xe1, 0x0a, 0xed, 0x3e, 0xd4, 0xae, 0x37, 0x52,
+	0xa1, 0x38, 0x60, 0xd5, 0xf4, 0x15, 0x38, 0xd3, 0x40, 0x9d, 0x90, 0x00, 0xe6, 0xe4, 0x6f, 0x37,
+	0xe4, 0xa2, 0xe2, 0x47, 0x7e, 0x95, 0x78, 0xf9, 0x12, 0xa2, 0x49, 0xa3, 0x19, 0xb8, 0xb7, 0x87,
+	0xe9, 0x25, 0xfa, 0xf9, 0xfd, 0x5d, 0x4d, 0x34, 0xc5, 0xd9, 0x6b, 0xe9, 0x45, 0xd9, 0xb3, 0x1f,
+	0x82, 0x33, 0x0e, 0xc3, 0x9c, 0x61, 0xaa, 0xb1, 0xc7, 0x0b, 0xd3, 0xb5, 0xa3, 0xbf, 0x2c, 0x80,
+	0x89, 0x24, 0x3d, 0x21, 0xa3, 0x15, 0x8a, 0x01, 0x9c, 0xcd, 0xa4, 0x22, 0x71, 0x8f, 0x37, 0x1c,
+	0x06, 0x4b, 0x8f, 0x81, 0xea, 0xb4, 0x7f, 0x90, 0x7f, 0xbb, 0xf3, 0x32, 0xf1, 0x55, 0x9e, 0xb1,
+	0xfd, 0x6e, 0xc1, 0x4f, 0x4b, 0xdb, 0xef, 0xd2, 0x5c, 0x9e, 0xf3, 0xaf, 0xf7, 0xcb, 0xff, 0x02,
+	0x00, 0x00, 0xff, 0xff, 0xf2, 0x1c, 0x18, 0x78, 0x87, 0x07, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -812,10 +956,12 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type BotStoreClient interface {
-	// TODO: stored data []byte might be better as json or json string objects?
-	Get(ctx context.Context, in *ByKey, opts ...grpc.CallOption) (*KeyValResponse, error)
-	Set(ctx context.Context, in *SetByKey, opts ...grpc.CallOption) (*Success, error)
-	Delete(ctx context.Context, in *ByKey, opts ...grpc.CallOption) (*Success, error)
+	Get(ctx context.Context, in *DatastoreKey, opts ...grpc.CallOption) (*KeyValResponse, error)
+	Put(ctx context.Context, in *DatastoreKeyValue, opts ...grpc.CallOption) (*Empty, error)
+	Delete(ctx context.Context, in *DatastoreKey, opts ...grpc.CallOption) (*Empty, error)
+	Close(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
+	Has(ctx context.Context, in *DatastoreKey, opts ...grpc.CallOption) (*Exists, error)
+	GetSize(ctx context.Context, in *DatastoreKey, opts ...grpc.CallOption) (*DatastoreSize, error)
 }
 
 type botStoreClient struct {
@@ -826,7 +972,7 @@ func NewBotStoreClient(cc *grpc.ClientConn) BotStoreClient {
 	return &botStoreClient{cc}
 }
 
-func (c *botStoreClient) Get(ctx context.Context, in *ByKey, opts ...grpc.CallOption) (*KeyValResponse, error) {
+func (c *botStoreClient) Get(ctx context.Context, in *DatastoreKey, opts ...grpc.CallOption) (*KeyValResponse, error) {
 	out := new(KeyValResponse)
 	err := c.cc.Invoke(ctx, "/pb.BotStore/Get", in, out, opts...)
 	if err != nil {
@@ -835,18 +981,45 @@ func (c *botStoreClient) Get(ctx context.Context, in *ByKey, opts ...grpc.CallOp
 	return out, nil
 }
 
-func (c *botStoreClient) Set(ctx context.Context, in *SetByKey, opts ...grpc.CallOption) (*Success, error) {
-	out := new(Success)
-	err := c.cc.Invoke(ctx, "/pb.BotStore/Set", in, out, opts...)
+func (c *botStoreClient) Put(ctx context.Context, in *DatastoreKeyValue, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/pb.BotStore/Put", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botStoreClient) Delete(ctx context.Context, in *ByKey, opts ...grpc.CallOption) (*Success, error) {
-	out := new(Success)
+func (c *botStoreClient) Delete(ctx context.Context, in *DatastoreKey, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
 	err := c.cc.Invoke(ctx, "/pb.BotStore/Delete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *botStoreClient) Close(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/pb.BotStore/Close", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *botStoreClient) Has(ctx context.Context, in *DatastoreKey, opts ...grpc.CallOption) (*Exists, error) {
+	out := new(Exists)
+	err := c.cc.Invoke(ctx, "/pb.BotStore/Has", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *botStoreClient) GetSize(ctx context.Context, in *DatastoreKey, opts ...grpc.CallOption) (*DatastoreSize, error) {
+	out := new(DatastoreSize)
+	err := c.cc.Invoke(ctx, "/pb.BotStore/GetSize", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -855,10 +1028,35 @@ func (c *botStoreClient) Delete(ctx context.Context, in *ByKey, opts ...grpc.Cal
 
 // BotStoreServer is the server API for BotStore service.
 type BotStoreServer interface {
-	// TODO: stored data []byte might be better as json or json string objects?
-	Get(context.Context, *ByKey) (*KeyValResponse, error)
-	Set(context.Context, *SetByKey) (*Success, error)
-	Delete(context.Context, *ByKey) (*Success, error)
+	Get(context.Context, *DatastoreKey) (*KeyValResponse, error)
+	Put(context.Context, *DatastoreKeyValue) (*Empty, error)
+	Delete(context.Context, *DatastoreKey) (*Empty, error)
+	Close(context.Context, *Empty) (*Empty, error)
+	Has(context.Context, *DatastoreKey) (*Exists, error)
+	GetSize(context.Context, *DatastoreKey) (*DatastoreSize, error)
+}
+
+// UnimplementedBotStoreServer can be embedded to have forward compatible implementations.
+type UnimplementedBotStoreServer struct {
+}
+
+func (*UnimplementedBotStoreServer) Get(ctx context.Context, req *DatastoreKey) (*KeyValResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (*UnimplementedBotStoreServer) Put(ctx context.Context, req *DatastoreKeyValue) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Put not implemented")
+}
+func (*UnimplementedBotStoreServer) Delete(ctx context.Context, req *DatastoreKey) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (*UnimplementedBotStoreServer) Close(ctx context.Context, req *Empty) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Close not implemented")
+}
+func (*UnimplementedBotStoreServer) Has(ctx context.Context, req *DatastoreKey) (*Exists, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Has not implemented")
+}
+func (*UnimplementedBotStoreServer) GetSize(ctx context.Context, req *DatastoreKey) (*DatastoreSize, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSize not implemented")
 }
 
 func RegisterBotStoreServer(s *grpc.Server, srv BotStoreServer) {
@@ -866,7 +1064,7 @@ func RegisterBotStoreServer(s *grpc.Server, srv BotStoreServer) {
 }
 
 func _BotStore_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ByKey)
+	in := new(DatastoreKey)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -878,31 +1076,31 @@ func _BotStore_Get_Handler(srv interface{}, ctx context.Context, dec func(interf
 		FullMethod: "/pb.BotStore/Get",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotStoreServer).Get(ctx, req.(*ByKey))
+		return srv.(BotStoreServer).Get(ctx, req.(*DatastoreKey))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotStore_Set_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetByKey)
+func _BotStore_Put_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DatastoreKeyValue)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotStoreServer).Set(ctx, in)
+		return srv.(BotStoreServer).Put(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pb.BotStore/Set",
+		FullMethod: "/pb.BotStore/Put",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotStoreServer).Set(ctx, req.(*SetByKey))
+		return srv.(BotStoreServer).Put(ctx, req.(*DatastoreKeyValue))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BotStore_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ByKey)
+	in := new(DatastoreKey)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -914,7 +1112,61 @@ func _BotStore_Delete_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: "/pb.BotStore/Delete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotStoreServer).Delete(ctx, req.(*ByKey))
+		return srv.(BotStoreServer).Delete(ctx, req.(*DatastoreKey))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BotStore_Close_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BotStoreServer).Close(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.BotStore/Close",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BotStoreServer).Close(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BotStore_Has_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DatastoreKey)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BotStoreServer).Has(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.BotStore/Has",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BotStoreServer).Has(ctx, req.(*DatastoreKey))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BotStore_GetSize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DatastoreKey)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BotStoreServer).GetSize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.BotStore/GetSize",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BotStoreServer).GetSize(ctx, req.(*DatastoreKey))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -928,12 +1180,24 @@ var _BotStore_serviceDesc = grpc.ServiceDesc{
 			Handler:    _BotStore_Get_Handler,
 		},
 		{
-			MethodName: "Set",
-			Handler:    _BotStore_Set_Handler,
+			MethodName: "Put",
+			Handler:    _BotStore_Put_Handler,
 		},
 		{
 			MethodName: "Delete",
 			Handler:    _BotStore_Delete_Handler,
+		},
+		{
+			MethodName: "Close",
+			Handler:    _BotStore_Close_Handler,
+		},
+		{
+			MethodName: "Has",
+			Handler:    _BotStore_Has_Handler,
+		},
+		{
+			MethodName: "GetSize",
+			Handler:    _BotStore_GetSize_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -978,6 +1242,17 @@ func (c *ipfsHandlerClient) Add(ctx context.Context, in *AddData, opts ...grpc.C
 type IpfsHandlerServer interface {
 	Get(context.Context, *GetData) (*ByteData, error)
 	Add(context.Context, *AddData) (*IPFSPin, error)
+}
+
+// UnimplementedIpfsHandlerServer can be embedded to have forward compatible implementations.
+type UnimplementedIpfsHandlerServer struct {
+}
+
+func (*UnimplementedIpfsHandlerServer) Get(ctx context.Context, req *GetData) (*ByteData, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (*UnimplementedIpfsHandlerServer) Add(ctx context.Context, req *AddData) (*IPFSPin, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Add not implemented")
 }
 
 func RegisterIpfsHandlerServer(s *grpc.Server, srv IpfsHandlerServer) {
@@ -1099,6 +1374,23 @@ type BotserviceServer interface {
 	Delete(context.Context, *APIRequest) (*BotResponse, error)
 }
 
+// UnimplementedBotserviceServer can be embedded to have forward compatible implementations.
+type UnimplementedBotserviceServer struct {
+}
+
+func (*UnimplementedBotserviceServer) Post(ctx context.Context, req *APIRequestB) (*BotResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Post not implemented")
+}
+func (*UnimplementedBotserviceServer) Get(ctx context.Context, req *APIRequest) (*BotResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (*UnimplementedBotserviceServer) Put(ctx context.Context, req *APIRequestB) (*BotResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Put not implemented")
+}
+func (*UnimplementedBotserviceServer) Delete(ctx context.Context, req *APIRequest) (*BotResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+
 func RegisterBotserviceServer(s *grpc.Server, srv BotserviceServer) {
 	s.RegisterService(&_Botservice_serviceDesc, srv)
 }
@@ -1198,56 +1490,4 @@ var _Botservice_serviceDesc = grpc.ServiceDesc{
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "bot.proto",
-}
-
-func init() { proto.RegisterFile("bot.proto", fileDescriptor_bot_de304fd6a777e0e9) }
-
-var fileDescriptor_bot_de304fd6a777e0e9 = []byte{
-	// 727 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x55, 0xdd, 0x6e, 0xda, 0x4a,
-	0x10, 0x96, 0xed, 0xf0, 0x37, 0x26, 0x24, 0x67, 0xcf, 0xd1, 0x11, 0x41, 0x47, 0xe7, 0x70, 0x9c,
-	0x2a, 0xa1, 0x37, 0xb4, 0xa5, 0x91, 0xfa, 0x73, 0x51, 0x09, 0x92, 0x34, 0x44, 0xe9, 0x05, 0x32,
-	0x55, 0xae, 0x5a, 0x21, 0x83, 0x27, 0xc5, 0x2a, 0x78, 0x5d, 0xef, 0x80, 0xe4, 0x87, 0xe9, 0x4b,
-	0xf4, 0x6d, 0xfa, 0x0c, 0x7d, 0x89, 0x6a, 0xd7, 0x6b, 0x43, 0x28, 0x69, 0x7b, 0x91, 0xbb, 0xd9,
-	0x99, 0x6f, 0xbe, 0x19, 0x7f, 0x3b, 0x3b, 0x86, 0xca, 0x98, 0x53, 0x3b, 0x8a, 0x39, 0x71, 0x66,
-	0x46, 0x63, 0xa7, 0x04, 0x85, 0xf3, 0x79, 0x44, 0x89, 0xf3, 0xcd, 0x00, 0xe8, 0x73, 0x41, 0xa7,
-	0x3c, 0xbc, 0x09, 0x3e, 0x30, 0x06, 0x3b, 0xa1, 0x37, 0xc7, 0xba, 0xd1, 0x34, 0x5a, 0x15, 0x57,
-	0xd9, 0xac, 0x06, 0x66, 0xe0, 0xd7, 0x4d, 0xe5, 0x31, 0x03, 0x9f, 0x1d, 0xc3, 0x5e, 0x8c, 0x33,
-	0xf4, 0x04, 0x8e, 0x96, 0x18, 0x8b, 0x80, 0x87, 0x75, 0x4b, 0x05, 0x6b, 0xda, 0x7d, 0x9d, 0x7a,
-	0xd9, 0xff, 0x50, 0xcd, 0x80, 0x53, 0x4f, 0x4c, 0xeb, 0x3b, 0x0a, 0x65, 0x6b, 0x5f, 0xdf, 0x13,
-	0x53, 0xd6, 0x81, 0x62, 0xe4, 0xc5, 0xde, 0x5c, 0xd4, 0x0b, 0x4d, 0xab, 0x65, 0x77, 0x1a, 0xed,
-	0x68, 0xdc, 0x5e, 0xf5, 0xd3, 0x1e, 0xa8, 0xe0, 0x79, 0x48, 0x71, 0xe2, 0x6a, 0x64, 0xe3, 0x05,
-	0xd8, 0x6b, 0x6e, 0xb6, 0x0f, 0xd6, 0x47, 0x4c, 0x74, 0xc7, 0xd2, 0x64, 0x7f, 0x41, 0x61, 0xe9,
-	0xcd, 0x16, 0xa8, 0x7b, 0x4e, 0x0f, 0x2f, 0xcd, 0xe7, 0x86, 0xf3, 0x0e, 0xec, 0x1e, 0x27, 0x17,
-	0x45, 0xc4, 0x43, 0x81, 0xec, 0x6f, 0x28, 0x0a, 0xf2, 0x68, 0x21, 0x54, 0x76, 0xc1, 0xd5, 0x27,
-	0xa9, 0xc2, 0x98, 0xfb, 0x89, 0xca, 0xaf, 0xba, 0xca, 0x96, 0x1f, 0x33, 0xe1, 0x21, 0x61, 0x48,
-	0x23, 0x4a, 0x22, 0xd4, 0x9f, 0x6c, 0x6b, 0xdf, 0xdb, 0x24, 0x42, 0xe7, 0xab, 0x01, 0xd5, 0xd3,
-	0x59, 0x80, 0x61, 0xa6, 0x66, 0x0b, 0xf6, 0xc7, 0x9c, 0x46, 0x82, 0x78, 0x8c, 0x23, 0x81, 0xf1,
-	0x12, 0x63, 0x55, 0x69, 0xd7, 0xad, 0x8d, 0x39, 0x0d, 0xa5, 0x7b, 0xa8, 0xbc, 0xac, 0x0d, 0x7f,
-	0x06, 0xd1, 0x8d, 0x18, 0x4d, 0xbd, 0xd0, 0x9f, 0x61, 0x9c, 0x81, 0x4d, 0x05, 0xfe, 0x43, 0x86,
-	0xfa, 0x69, 0x44, 0xe3, 0x4f, 0x72, 0xdd, 0x2c, 0xa5, 0xdb, 0x3f, 0x52, 0xb7, 0xf5, 0xda, 0xf7,
-	0xad, 0x5c, 0x1f, 0xa0, 0x3b, 0xb8, 0x74, 0xf1, 0xd3, 0x02, 0x05, 0x49, 0x81, 0x7c, 0x8f, 0x3c,
-	0x95, 0x5a, 0x75, 0x95, 0xcd, 0x8e, 0xa0, 0x20, 0x90, 0x16, 0x91, 0xca, 0xb5, 0x3b, 0xfb, 0x9b,
-	0x1d, 0xb9, 0x69, 0xd8, 0x79, 0x0f, 0xf6, 0x8a, 0xa9, 0xb7, 0x95, 0x6a, 0x9b, 0xfe, 0x39, 0xbd,
-	0xf5, 0x73, 0xfa, 0x43, 0x28, 0x0d, 0x17, 0x93, 0x09, 0x0a, 0xc1, 0xea, 0x50, 0x12, 0xa9, 0xa9,
-	0xd8, 0xcb, 0x6e, 0x76, 0x74, 0xfe, 0x85, 0x72, 0x2f, 0x21, 0x3c, 0xd3, 0xc5, 0x36, 0x1b, 0x70,
-	0x1e, 0x41, 0xe9, 0x72, 0xf0, 0x7a, 0x38, 0x08, 0x42, 0x19, 0x56, 0xc3, 0xab, 0x5f, 0x84, 0xb4,
-	0x33, 0xe1, 0xcc, 0x5c, 0x38, 0xe7, 0x15, 0xd4, 0xae, 0x30, 0xb9, 0xf6, 0x66, 0xf9, 0x6c, 0x6d,
-	0xfb, 0xae, 0x3a, 0x94, 0xb2, 0x17, 0x63, 0xaa, 0x81, 0xcb, 0x8e, 0xce, 0x63, 0x28, 0x0f, 0x91,
-	0x7a, 0xc9, 0x15, 0x6e, 0xbb, 0x96, 0x8c, 0xcb, 0x5c, 0x6b, 0xf1, 0x00, 0x0a, 0x77, 0xc0, 0x65,
-	0xf7, 0x17, 0x48, 0xd9, 0xc7, 0x45, 0x1e, 0xe5, 0xdd, 0x4b, 0x7b, 0x4b, 0xf7, 0xcf, 0xa0, 0xd4,
-	0xf5, 0xfd, 0xbb, 0xd4, 0x90, 0x6d, 0x63, 0x38, 0x89, 0x93, 0x88, 0x54, 0x52, 0xd9, 0xcd, 0x8e,
-	0xce, 0x67, 0x03, 0x2a, 0xdd, 0x09, 0x05, 0x4b, 0xec, 0x71, 0xd2, 0x8b, 0xc2, 0xc8, 0x17, 0x45,
-	0xb6, 0x4c, 0xcc, 0xb5, 0x65, 0xf2, 0x64, 0x63, 0x70, 0x0f, 0xe4, 0x3d, 0xe6, 0x14, 0xf7, 0x3d,
-	0xb5, 0x27, 0xb0, 0x9b, 0x73, 0xbf, 0x09, 0x04, 0xb1, 0x43, 0x28, 0x04, 0x84, 0x73, 0x39, 0x10,
-	0xb2, 0xfa, 0xee, 0xad, 0xea, 0x6e, 0x1a, 0xeb, 0x10, 0x94, 0x7b, 0xfa, 0x79, 0xb2, 0x07, 0x60,
-	0x5d, 0x20, 0xb1, 0x8a, 0x04, 0x2a, 0xbd, 0x1b, 0x4c, 0x9a, 0x1b, 0x97, 0xdd, 0x04, 0x6b, 0x88,
-	0xc4, 0xaa, 0x32, 0x94, 0xdd, 0x63, 0xc3, 0x56, 0x27, 0x3d, 0x8b, 0x4d, 0x28, 0x9e, 0xe1, 0x0c,
-	0x09, 0xd7, 0xa9, 0xd6, 0x11, 0x9d, 0x01, 0xd8, 0x97, 0xab, 0x77, 0x2e, 0x29, 0x65, 0x61, 0x05,
-	0xd1, 0xb7, 0xd9, 0xa8, 0xa6, 0xa9, 0x7a, 0x70, 0xff, 0x03, 0xab, 0xeb, 0xfb, 0x29, 0x42, 0x5f,
-	0x5f, 0xca, 0xa8, 0x47, 0xb7, 0xf3, 0xc5, 0x00, 0xe8, 0x71, 0x92, 0xbb, 0x24, 0x98, 0x20, 0x6b,
-	0xc1, 0xce, 0x80, 0x0b, 0x62, 0x7b, 0x2a, 0x61, 0xf5, 0x04, 0x1b, 0xca, 0xb1, 0xbe, 0x17, 0x8f,
-	0xd2, 0xda, 0xb5, 0xdb, 0xc0, 0x1f, 0x71, 0xc7, 0x60, 0x0d, 0x16, 0xbf, 0x43, 0xf8, 0x30, 0xff,
-	0xfa, 0x5f, 0x71, 0x8e, 0x8b, 0xea, 0x27, 0xf5, 0xf4, 0x7b, 0x00, 0x00, 0x00, 0xff, 0xff, 0x4e,
-	0xe3, 0x65, 0xb7, 0xb1, 0x06, 0x00, 0x00,
 }
