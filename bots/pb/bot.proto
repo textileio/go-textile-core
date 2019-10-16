@@ -55,13 +55,16 @@ message KeyValResponse {
     bytes data = 1;
 }
 
-message SetByKey {
+message DatastoreKeyValue {
     string key = 1;
-    bytes data = 2;
+    bytes value = 2;
 }
 
-message ByKey {
+message StructKey {
     string key = 1;
+}
+message DatastoreKey {
+    StructKey struct = 1;
 }
 
 message GetData {
@@ -74,13 +77,22 @@ message AddData {
     bool encrypt = 2;
 }
 
+message DatastoreSize {
+    int32 size = 1;
+}
+
+message Exists {
+    bool exists = 1;
+}
+
 // BotStore is an interface that should be provided by the Cafe to get/set to a storage backend
 service BotStore {
-	// TODO: stored data []byte might be better as json or json string objects?
-	rpc Get(ByKey) returns (KeyValResponse);
-	rpc Put(SetByKey) returns (Empty);
-	rpc Delete(ByKey) returns (Empty);
-	// TODO: add cleanup/cron method
+	rpc Get(DatastoreKey) returns (KeyValResponse);
+	rpc Put(DatastoreKeyValue) returns (Empty);
+	rpc Delete(DatastoreKey) returns (Empty);
+    rpc Close(Empty) returns (Empty);
+    rpc Has(DatastoreKey) returns (Exists);
+    rpc GetSize(DatastoreKey) returns (DatastoreSize);
 }
 
 // IpfsHandler is an interface to the gateway method to fetch + decrypt content
