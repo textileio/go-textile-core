@@ -16,7 +16,7 @@ type HostConfig struct {
 
 // ClientConfig contain all the services and config passed by the host node
 type ClientConfig struct {
-	Store  DatastoreBasic
+	Store  DatastoreWithoutQuery
 	Ipfs   Ipfs
 	Params map[string]string
 }
@@ -29,7 +29,7 @@ type Response struct {
 }
 
 // Read is the read-side of the Datastore interface minus Query.
-type DatastoreBasic interface {
+type DatastoreWithoutQuery interface {
 	// See datastore Get
 	Get(key datastore.Key) (value []byte, err error)
 	// See datastore Has
