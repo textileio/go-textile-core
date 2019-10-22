@@ -114,29 +114,29 @@ func PutOptions(opts ...PutOption) *PutSettings {
 	return options
 }
 
-// ListenOpt is an instance helper for creating listen options.
-var ListenOpt ListenOption
+// SubOpt is an instance helper for creating subscription options.
+var SubOpt SubOption
 
-// ListenOption is used to create ListenSettings.
-type ListenOption func(*ListenSettings)
+// SubOption is used to create SubSettings.
+type SubOption func(*SubSettings)
 
-// ThreadID restricts the listener to the given thread.
+// ThreadID restricts the subscription to the given thread.
 // Use this option multiple times to build up a list of threads
-// to listen to.
-func (ListenOption) ThreadID(val thread.ID) ListenOption {
-	return func(settings *ListenSettings) {
+// to subscribe to.
+func (SubOption) ThreadID(val thread.ID) SubOption {
+	return func(settings *SubSettings) {
 		settings.ThreadIDs = append(settings.ThreadIDs, val)
 	}
 }
 
-// ListenSettings holds values used for a listen operation.
-type ListenSettings struct {
+// SubSettings holds values used for a subscribe operation.
+type SubSettings struct {
 	ThreadIDs []thread.ID
 }
 
-// ListenOptions returns listen settings from options.
-func ListenOptions(opts ...ListenOption) *ListenSettings {
-	options := &ListenSettings{}
+// SubOptions returns subscription settings from options.
+func SubOptions(opts ...SubOption) *SubSettings {
+	options := &SubSettings{}
 
 	for _, opt := range opts {
 		opt(options)

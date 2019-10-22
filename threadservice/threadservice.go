@@ -2,56 +2,60 @@ package threadservice
 
 import (
 	"context"
+	"io"
 
 	"github.com/ipfs/go-cid"
 	format "github.com/ipfs/go-ipld-format"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
+	ma "github.com/multiformats/go-multiaddr"
 	"github.com/textileio/go-textile-core/thread"
 	tstore "github.com/textileio/go-textile-core/threadstore"
 )
 
 // Threadservice is an API for working with threads.
 type Threadservice interface {
-	// Threadstore persists thread log details.
-	tstore.Threadstore
+	io.Closer
 
-	// Host provides a network listener identity.
+	// Host provides a network identity.
 	Host() host.Host
 
-	// DAGService provides a DAG API for reading and writing thread logs.
-	DAGService() format.DAGService
+	// DAGService provides a DAG API to the network.
+	format.DAGService
 
-	// Add a new record by wrapping body. See AddOption for more.
-	Add(ctx context.Context, body format.Node, opts ...AddOption) (Record, error)
+	// Store persists thread details.
+	Store() tstore.Threadstore
 
-	// Put an existing record. See PutOption for more.
-	Put(ctx context.Context, node thread.Record, opts ...PutOption) error
+	// AddThread from a multiaddress.
+	AddThread(ctx context.Context, addr ma.Multiaddr) error
 
-	// Get returns the record at cid.
-	Get(ctx context.Context, id thread.ID, lid peer.ID, rid cid.Cid) (thread.Record, error)
-
-	// Listen returns a read-only channel of records.
-	Listen(opts ...ListenOption) RecordListener
-
-	// Pull for new records from the given thread.
+	// PullThread for new records.
 	// Logs owned by this host are traversed locally.
 	// Remotely addressed logs are pulled from the network.
-	Pull(ctx context.Context, id thread.ID) error
+	PullThread(ctx context.Context, id thread.ID) error
 
-	// GetLogs returns info about the logs in the given thread.
-	GetLogs(id thread.ID) ([]thread.LogInfo, error)
+	// Delete a thread.
+	DeleteThread(ctx context.Context, id thread.ID) error
 
-	// Delete the given thread.
-	Delete(ctx context.Context, id thread.ID) error
+	// Subscribe returns a read-only channel of records.
+	Subscribe(opts ...SubOption) Subscription
+
+	// AddRecord with body. See AddOption for more.
+	AddRecord(ctx context.Context, body format.Node, opts ...AddOption) (Record, error)
+
+	// PutRecord adds an existing record. See PutOption for more.
+	PutRecord(ctx context.Context, node thread.Record, opts ...PutOption) error
+
+	// GetRecord returns the record at cid.
+	GetRecord(ctx context.Context, id thread.ID, lid peer.ID, rid cid.Cid) (thread.Record, error)
 }
 
-// RecordListener receives thread record updates.
-type RecordListener interface {
-	// Discard closes the listener, disabling the reception of further records.
+// Subscription receives thread record updates.
+type Subscription interface {
+	// Discard closes the subscription, disabling the reception of further records.
 	Discard()
 
-	// Channel returns the channel that receives broadcast records.
+	// Channel returns the channel that receives records.
 	Channel() <-chan Record
 }
 
