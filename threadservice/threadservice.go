@@ -43,9 +43,6 @@ type Threadservice interface {
 	// AddRecord with body. See AddOption for more.
 	AddRecord(ctx context.Context, body format.Node, opts ...AddOption) (Record, error)
 
-	// PutRecord adds an existing record. See PutOption for more.
-	PutRecord(ctx context.Context, node thread.Record, opts ...PutOption) error
-
 	// GetRecord returns the record at cid.
 	GetRecord(ctx context.Context, id thread.ID, lid peer.ID, rid cid.Cid) (thread.Record, error)
 }
