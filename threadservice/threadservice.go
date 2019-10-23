@@ -27,7 +27,7 @@ type Threadservice interface {
 	Store() tstore.Threadstore
 
 	// AddThread from a multiaddress.
-	AddThread(ctx context.Context, addr ma.Multiaddr) error
+	AddThread(ctx context.Context, addr ma.Multiaddr) (thread.Info, error)
 
 	// PullThread for new records.
 	// Logs owned by this host are traversed locally.
