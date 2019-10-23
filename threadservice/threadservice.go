@@ -37,14 +37,17 @@ type Threadservice interface {
 	// Delete a thread.
 	DeleteThread(ctx context.Context, id thread.ID) error
 
-	// Subscribe returns a read-only channel of records.
-	Subscribe(opts ...SubOption) Subscription
+	// AddFollower to a thread.
+	AddFollower(ctx context.Context, id thread.ID, pid peer.ID) error
 
 	// AddRecord with body. See AddOption for more.
 	AddRecord(ctx context.Context, body format.Node, opts ...AddOption) (Record, error)
 
 	// GetRecord returns the record at cid.
 	GetRecord(ctx context.Context, id thread.ID, lid peer.ID, rid cid.Cid) (thread.Record, error)
+
+	// Subscribe returns a read-only channel of records.
+	Subscribe(opts ...SubOption) Subscription
 }
 
 // Subscription receives thread record updates.
