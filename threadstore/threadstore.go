@@ -9,6 +9,7 @@ import (
 	ic "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
+	sym "github.com/textileio/go-textile-core/crypto/symmetric"
 	"github.com/textileio/go-textile-core/thread"
 )
 
@@ -73,16 +74,16 @@ type KeyBook interface {
 	AddPrivKey(thread.ID, peer.ID, ic.PrivKey) error
 
 	// ReadKey retrieves the read key of a log.
-	ReadKey(thread.ID, peer.ID) ([]byte, error)
+	ReadKey(thread.ID, peer.ID) (*sym.Key, error)
 
 	// AddReadKey adds a read key under a log.
-	AddReadKey(thread.ID, peer.ID, []byte) error
+	AddReadKey(thread.ID, peer.ID, *sym.Key) error
 
 	// FollowKey retrieves the follow key of a log.
-	FollowKey(thread.ID, peer.ID) ([]byte, error)
+	FollowKey(thread.ID, peer.ID) (*sym.Key, error)
 
 	// AddFollowKey adds a follow key under a log.
-	AddFollowKey(thread.ID, peer.ID, []byte) error
+	AddFollowKey(thread.ID, peer.ID, *sym.Key) error
 
 	// LogsWithKeys returns a list of log IDs for a thread.
 	LogsWithKeys(thread.ID) (peer.IDSlice, error)

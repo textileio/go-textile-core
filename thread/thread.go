@@ -12,6 +12,7 @@ import (
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
 	mbase "github.com/multiformats/go-multibase"
+	sym "github.com/textileio/go-textile-core/crypto/symmetric"
 )
 
 // Record is the most basic component of a log.
@@ -314,8 +315,8 @@ type LogInfo struct {
 	ID        peer.ID
 	PubKey    ic.PubKey
 	PrivKey   ic.PrivKey
-	FollowKey []byte
-	ReadKey   []byte
+	FollowKey *sym.Key
+	ReadKey   *sym.Key
 	Addrs     []ma.Multiaddr
 	Heads     []cid.Cid
 }
