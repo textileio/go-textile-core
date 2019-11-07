@@ -9,6 +9,7 @@ import (
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
+	sym "github.com/textileio/go-textile-core/crypto/symmetric"
 	"github.com/textileio/go-textile-core/thread"
 	tstore "github.com/textileio/go-textile-core/threadstore"
 )
@@ -27,7 +28,7 @@ type Threadservice interface {
 	Store() tstore.Threadstore
 
 	// AddThread from a multiaddress.
-	AddThread(ctx context.Context, addr ma.Multiaddr) (thread.Info, error)
+	AddThread(ctx context.Context, addr ma.Multiaddr, fk *sym.Key, rk *sym.Key) (thread.Info, error)
 
 	// PullThread for new records.
 	// Logs owned by this host are traversed locally.

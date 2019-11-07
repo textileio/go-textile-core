@@ -28,6 +28,9 @@ type Threadstore interface {
 	// Threads returns all threads in the store.
 	Threads() (thread.IDSlice, error)
 
+	// AddThread adds a thread.
+	AddThread(thread.Info) error
+
 	// ThreadInfo returns info about a thread.
 	ThreadInfo(thread.ID) (thread.Info, error)
 
