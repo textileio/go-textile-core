@@ -306,17 +306,17 @@ func (s IDSlice) Less(i, j int) bool { return s[i].str < s[j].str }
 
 // Info holds a thread ID associated known logs.
 type Info struct {
-	ID   ID
-	Logs peer.IDSlice
+	ID        ID
+	Logs      peer.IDSlice
+	FollowKey *sym.Key
+	ReadKey   *sym.Key
 }
 
 // LogInfo holds known info about a log.
 type LogInfo struct {
-	ID        peer.ID
-	PubKey    ic.PubKey
-	PrivKey   ic.PrivKey
-	FollowKey *sym.Key
-	ReadKey   *sym.Key
-	Addrs     []ma.Multiaddr
-	Heads     []cid.Cid
+	ID      peer.ID
+	PubKey  ic.PubKey
+	PrivKey ic.PrivKey
+	Addrs   []ma.Multiaddr
+	Heads   []cid.Cid
 }
