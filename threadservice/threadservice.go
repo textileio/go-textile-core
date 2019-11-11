@@ -45,7 +45,7 @@ type Threadservice interface {
 	AddRecord(ctx context.Context, body format.Node, opts ...AddOption) (Record, error)
 
 	// GetRecord returns the record at cid.
-	GetRecord(ctx context.Context, id thread.ID, lid peer.ID, rid cid.Cid) (thread.Record, error)
+	GetRecord(ctx context.Context, id thread.ID, rid cid.Cid) (thread.Record, error)
 
 	// Subscribe returns a read-only channel of records.
 	Subscribe(opts ...SubOption) Subscription
