@@ -9,7 +9,7 @@ import (
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
-	sym "github.com/textileio/go-textile-core/crypto/symmetric"
+	"github.com/textileio/go-textile-core/options"
 	"github.com/textileio/go-textile-core/thread"
 	tstore "github.com/textileio/go-textile-core/threadstore"
 )
@@ -28,11 +28,9 @@ type Threadservice interface {
 	Store() tstore.Threadstore
 
 	// AddThread from a multiaddress.
-	AddThread(ctx context.Context, addr ma.Multiaddr, fk *sym.Key, rk *sym.Key) (thread.Info, error)
+	AddThread(ctx context.Context, addr ma.Multiaddr, opts ...options.AddOption) (thread.Info, error)
 
 	// PullThread for new records.
-	// Logs owned by this host are traversed locally.
-	// Remotely addressed logs are pulled from the network.
 	PullThread(ctx context.Context, id thread.ID) error
 
 	// Delete a thread.
@@ -41,14 +39,14 @@ type Threadservice interface {
 	// AddFollower to a thread.
 	AddFollower(ctx context.Context, id thread.ID, pid peer.ID) error
 
-	// AddRecord with body. See AddOption for more.
-	AddRecord(ctx context.Context, body format.Node, opts ...AddOption) (Record, error)
+	// AddRecord with body.
+	AddRecord(ctx context.Context, id thread.ID, body format.Node) (Record, error)
 
 	// GetRecord returns the record at cid.
 	GetRecord(ctx context.Context, id thread.ID, rid cid.Cid) (thread.Record, error)
 
 	// Subscribe returns a read-only channel of records.
-	Subscribe(opts ...SubOption) Subscription
+	Subscribe(opts ...options.SubOption) Subscription
 }
 
 // Subscription receives thread record updates.
