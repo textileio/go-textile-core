@@ -33,7 +33,7 @@ type Threadservice interface {
 	// PullThread for new records.
 	PullThread(ctx context.Context, id thread.ID) error
 
-	// Delete a thread.
+	// DeleteThread with id.
 	DeleteThread(ctx context.Context, id thread.ID) error
 
 	// AddFollower to a thread.
