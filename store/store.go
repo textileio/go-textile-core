@@ -2,8 +2,8 @@ package store
 
 import (
 	"github.com/google/uuid"
-	ipldformat "github.com/ipfs/go-ipld-format"
 	ds "github.com/ipfs/go-datastore"
+	ipldformat "github.com/ipfs/go-ipld-format"
 )
 
 const (
@@ -21,6 +21,11 @@ func NewEntityID() EntityID {
 
 func (e EntityID) String() string {
 	return string(e)
+}
+
+func IsValidEntityID(entityID string) bool {
+	_, err := uuid.Parse(entityID)
+	return err == nil
 }
 
 // Event is a local or remote event generated in a model and dispatcher
