@@ -31,11 +31,9 @@ func IsValidEntityID(entityID string) bool {
 // Event is a local or remote event generated in a model and dispatcher
 // by Dispatcher.
 type Event interface {
-	Body() []byte
 	Time() []byte
 	EntityID() EntityID
-	Type() string
-	Node() (ipldformat.Node, error)
+	Model() string
 }
 
 // ActionType is the type used by actions done in a txn
@@ -56,8 +54,8 @@ type Action struct {
 	Type ActionType
 	// EntityID of the instance in action
 	EntityID EntityID
-	// EntityType of the instance in action
-	EntityType string
+	// ModelName of the instance in action
+	ModelName string
 	// Previous is the instance before the action
 	Previous interface{}
 	// Current is the instance after the action was done
@@ -67,6 +65,8 @@ type Action struct {
 type ReduceAction struct {
 	// Type of the reduced action
 	Type ActionType
+	// Model in which action was made
+	Model string
 	// EntityID of the instance in reduced action
 	EntityID EntityID
 }
@@ -75,8 +75,10 @@ type ReduceAction struct {
 // events dispatched to thread logs, and viceversa.
 type EventCodec interface {
 	// Reduce applies generated events into state
-	Reduce(e Event, datastore ds.Datastore, baseKey ds.Key) ([]ReduceAction, error)
+	Reduce(events []Event, datastore ds.TxnDatastore, baseKey ds.Key) ([]ReduceAction, error)
 	// Create corresponding events to be dispatched
-	Create(ops []Action) ([]Event, error)
-	EventFromBytes(data []byte) (Event, error)
+	Create(ops []Action) ([]Event, ipldformat.Node, error)
+	// EventsFromBytes deserializes a ipldformat.Node bytes payload into
+	// Events.
+	EventsFromBytes(data []byte) ([]Event, error)
 }
