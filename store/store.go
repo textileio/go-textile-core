@@ -64,11 +64,18 @@ type Action struct {
 	Current interface{}
 }
 
+type ReduceAction struct {
+	// Type of the reduced action
+	Type ActionType
+	// EntityID of the instance in reduced action
+	EntityID EntityID
+}
+
 // EventCodec transforms actions generated in models to
 // events dispatched to thread logs, and viceversa.
 type EventCodec interface {
 	// Reduce applies generated events into state
-	Reduce(e Event, datastore ds.Datastore, baseKey ds.Key) error
+	Reduce(e Event, datastore ds.Datastore, baseKey ds.Key) ([]ReduceAction, error)
 	// Create corresponding events to be dispatched
 	Create(ops []Action) ([]Event, error)
 	EventFromBytes(data []byte) (Event, error)
